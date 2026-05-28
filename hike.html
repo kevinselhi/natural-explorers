@@ -41,6 +41,7 @@
       radial-gradient(circle at 82% 8%,  rgba(107,125,82,0.06), transparent 40%),
       radial-gradient(circle at 60% 88%, rgba(143,169,184,0.06), transparent 45%);
     background-attachment: fixed;
+    overflow-x: hidden; /* guard against the tilted plates nudging horizontal scroll on mobile */
   }
 
   .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.25rem 4rem; }
@@ -89,8 +90,24 @@
     text-transform: uppercase;
     margin: .35rem 0 0;
   }
-  .topnav { margin-top: .6rem; font-family: var(--display); font-size: 1.15rem; }
-  .topnav a { color: var(--sage); }
+  /* ----- Two-page series nav (shared with index.html) ----- */
+  .series {
+    margin-top: .8rem;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: .2rem .6rem;
+    font-family: var(--display);
+    font-size: 1.25rem;
+  }
+  .series a { color: var(--sage); text-decoration: none; padding: .25rem .45rem; border-radius: 4px; }
+  .series a:hover { color: var(--forest); text-decoration: underline; }
+  .series .here {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--ochre);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  .series .sep { color: var(--rule); }
 
   /* ----- Dated entry header strip ----- */
   .entry-head {
@@ -239,7 +256,7 @@
     body { background: #fff; }
     .plate, .note { box-shadow: none; }
     a { color: var(--ink); }
-    .topnav { display: none; }
+    .series { display: none; }
   }
 </style>
 </head>
@@ -263,7 +280,11 @@
     <span>Berkeley Natural Explorers Club</span>
   </div>
   <p class="kicker">A small-group hike guide</p>
-  <nav class="topnav"><a href="index.html">✎ Companion: Your First Nature Drawing →</a></nav>
+  <nav class="series" aria-label="In this guide">
+    <a href="hike.html" class="here" aria-current="page">The Hike</a>
+    <span class="sep" aria-hidden="true">✦</span>
+    <a href="index.html">First Nature Drawing</a>
+  </nav>
 </header>
 
 <main class="wrap">
