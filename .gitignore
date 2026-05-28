@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build artifacts
+.next/
+dist/
+build/
+*.log
+
+# OS
+.DS_Store
+
+# Local archive (history snapshot — kept locally, not published)
+naturejournal.bundle
+
+# Claude Code local settings
+.claude/settings.local.json

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your First Nature Drawing · Berkeley Natural Explorers Club</title>
+<meta name="description" content="A Berkeley Natural Explorers Club companion to the Thousand Oaks to John Hinkel Park hike: how to guide your child's first nature drawing at the waterfall, and how to grow it into a nature journal.">
+
+<!-- Fonts: handwritten display (Caveat) + readable serif (Lora). Robust system fallbacks
+     are declared in CSS in case the network blocks Google Fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Paper + ink */
+    --paper:        #f7f1e3;
+    --paper-light:  #fbf7ec;
+    --ink:          #3a3327;
+    --ink-soft:     #5d5443;
+
+    /* East Bay oak-woodland palette */
+    --sage:    #6b7d52;
+    --forest:  #445235;
+    --ochre:   #c9a23f;
+    --clay:    #b5654a;
+    --creek:   #8fa9b8;
+
+    --rule:    #d8ccae;
+
+    --display: "Caveat", "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+    --serif:   "Lora", Georgia, "EB Garamond", "Times New Roman", serif;
+
+    --measure: 42rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: var(--serif);
+    color: var(--ink);
+    line-height: 1.62;
+    font-size: 1.06rem;
+    /* Warm paper with the faintest grain via layered radial gradients. */
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(201,162,63,0.05), transparent 42%),
+      radial-gradient(circle at 82% 8%,  rgba(107,125,82,0.06), transparent 40%),
+      radial-gradient(circle at 60% 88%, rgba(143,169,184,0.06), transparent 45%);
+    background-attachment: fixed;
+  }
+
+  /* ----- Layout ----- */
+  .wrap {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+  }
+
+  section { margin: 3.25rem 0; }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    color: var(--forest);
+    line-height: 1.08;
+    font-weight: 700;
+    margin: 0 0 .5rem;
+  }
+  h1 { font-size: clamp(2.6rem, 8vw, 4rem); }
+  h2 { font-size: clamp(2rem, 5.5vw, 2.9rem); color: var(--clay); }
+  h3 { font-size: clamp(1.45rem, 4vw, 1.8rem); color: var(--forest); }
+
+  p { margin: 0 0 1rem; }
+  a { color: var(--clay); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--forest); }
+  strong { color: var(--ink); }
+
+  /* ----- Masthead ----- */
+  .masthead {
+    text-align: center;
+    padding: 2.5rem 1.25rem 1.5rem;
+    border-bottom: 2px dashed var(--rule);
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 6vw, 2.9rem);
+    color: var(--forest);
+    letter-spacing: .5px;
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    line-height: 1;
+  }
+  /* Inline SVG emblem (oak leaf + waterfall) so the masthead reads even before
+     the generated logo art is dropped in. */
+  .emblem { width: 1.6em; height: 1.6em; flex: 0 0 auto; }
+  .masthead .kicker {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: .95rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: .35rem 0 0;
+  }
+
+  /* ----- Dated entry header strip (recurring journal motif) ----- */
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem 1.4rem;
+    font-family: var(--display);
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+    border-top: 1.5px solid var(--rule);
+    border-bottom: 1.5px solid var(--rule);
+    padding: .5rem .2rem;
+    margin: 1rem 0 1.75rem;
+  }
+  .entry-head span { white-space: nowrap; }
+  .entry-head b { color: var(--clay); font-weight: 700; }
+
+  /* ----- Hero ----- */
+  .hero h1 { color: var(--forest); }
+  .lede { font-size: 1.2rem; }
+
+  /* ----- Illustration cards (taped-in sketch look) ----- */
+  figure.plate {
+    margin: 1.75rem 0;
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .6rem .6rem 0;
+    box-shadow: 0 6px 18px rgba(58,51,39,0.10);
+    transform: rotate(-0.5deg);
+  }
+  figure.plate:nth-of-type(even) { transform: rotate(0.6deg); }
+  figure.plate img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    /* Graceful empty state: until the art is generated, the alt text sits in a
+       soft framed box rather than a broken-image icon. */
+    min-height: 120px;
+    background: repeating-linear-gradient(
+      45deg, rgba(107,125,82,0.06), rgba(107,125,82,0.06) 10px,
+      rgba(201,162,63,0.06) 10px, rgba(201,162,63,0.06) 20px);
+    color: var(--ink-soft);
+    font-family: var(--display);
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  figure.plate figcaption {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    text-align: center;
+    padding: .4rem .3rem .7rem;
+  }
+  .plate--wide { transform: none; }
+  .plate--wide:nth-of-type(even) { transform: none; }
+
+  /* ----- Cards / callouts ----- */
+  .note {
+    background: rgba(143,169,184,0.14);
+    border-left: 4px solid var(--creek);
+    border-radius: 3px;
+    padding: .9rem 1.1rem;
+    margin: 1.5rem 0;
+  }
+  .note .label {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    color: var(--creek);
+    display: block;
+    margin-bottom: .1rem;
+  }
+
+  /* Principles list */
+  .principles { list-style: none; padding: 0; margin: 1.5rem 0; counter-reset: p; }
+  .principles > li {
+    counter-increment: p;
+    position: relative;
+    padding: 1.1rem 1.1rem 1.1rem 3.6rem;
+    margin: 0 0 1rem;
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .principles > li::before {
+    content: counter(p);
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--paper);
+    background: var(--sage);
+    border-radius: 50%;
+  }
+  .principles h3 { margin: 0 0 .25rem; }
+  .principles .try {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--clay);
+    margin: .35rem 0 0;
+  }
+
+  /* Step list (the first-drawing protocol) */
+  ol.steps { padding-left: 1.3rem; }
+  ol.steps li { margin: 0 0 .8rem; padding-left: .3rem; }
+
+  /* Pack list */
+  ul.pack { list-style: none; padding: 0; display: grid;
+            grid-template-columns: 1fr 1fr; gap: .5rem 1.2rem; }
+  ul.pack li { padding-left: 1.6rem; position: relative; }
+  ul.pack li::before {
+    content: "✦"; position: absolute; left: 0; color: var(--ochre);
+    font-size: 1.1rem; top: -1px;
+  }
+
+  /* Explore-next chips */
+  .explore { display: flex; flex-wrap: wrap; gap: .6rem; padding: 0; list-style: none; margin: 1.25rem 0; }
+  .explore li {
+    background: rgba(107,125,82,0.13);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: .35rem .9rem;
+    font-size: .98rem;
+  }
+
+  /* Printable checklist */
+  .checklist { list-style: none; padding: 0; margin: 1.25rem 0; }
+  .checklist li { padding-left: 2rem; position: relative; margin: 0 0 .6rem; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 0; top: .2em;
+    width: 1.1rem; height: 1.1rem; border: 2px solid var(--sage); border-radius: 3px;
+    background: var(--paper-light);
+  }
+
+  /* Hand-drawn divider */
+  .divider {
+    border: 0;
+    height: 22px;
+    margin: 2.75rem auto;
+    width: 70%;
+    background: no-repeat center / contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='22' viewBox='0 0 400 22'%3E%3Cpath d='M2 12 C 60 2, 120 22, 180 11 S 300 2, 398 12' fill='none' stroke='%236b7d52' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+
+  /* Footer */
+  footer {
+    border-top: 2px dashed var(--rule);
+    padding: 2rem 1.25rem 3rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: .95rem;
+  }
+  footer .free {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    color: var(--sage);
+    margin-bottom: .5rem;
+  }
+
+  @media (max-width: 30rem) {
+    ul.pack { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    figure.plate, figure.plate:nth-of-type(even) { transform: none; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .plate, .note { box-shadow: none; }
+    a { color: var(--ink); }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="wordmark">
+    <!-- Oak-leaf + waterfall emblem. Replace with assets/illustrations/logo.png when generated. -->
+    <svg class="emblem" viewBox="0 0 64 64" role="img" aria-label="Oak leaf and waterfall emblem">
+      <g fill="none" stroke="#445235" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 6 C 26 14, 20 14, 16 20 C 22 20, 24 24, 20 30 C 26 28, 28 32, 26 38 C 31 34, 33 38, 32 44"/>
+        <path d="M32 6 C 38 14, 44 14, 48 20 C 42 20, 40 24, 44 30 C 38 28, 36 32, 38 38 C 33 34, 31 38, 32 44"/>
+        <path d="M32 44 L 32 58"/>
+      </g>
+      <g fill="none" stroke="#8fa9b8" stroke-width="2" stroke-linecap="round">
+        <path d="M22 52 q 4 4 0 8"/>
+        <path d="M32 52 q 4 4 0 8"/>
+        <path d="M42 52 q 4 4 0 8"/>
+      </g>
+    </svg>
+    <span>Berkeley Natural Explorers Club</span>
+  </div>
+  <p class="kicker">A companion to the Thousand Oaks → John Hinkel Park hike</p>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Your First Nature Drawing</h1>
+    <div class="entry-head" aria-hidden="true">
+      <span><b>Date:</b> ____________</span>
+      <span><b>Place:</b> John Hinkel Park</span>
+      <span><b>Weather:</b> __________</span>
+      <span><b>Temp:</b> ______</span>
+    </div>
+    <p class="lede">At the end of today's hike, your group reaches the little waterfall in the
+      far corner of John Hinkel Park. You already pause here to listen to the water. This page
+      is an invitation to do one more small thing while you're sitting there: help your child
+      make their <strong>very first nature drawing</strong> — and plant the seed for a nature
+      journal they'll keep long after the walk home.</p>
+
+    <figure class="plate plate--wide">
+      <img src="assets/illustrations/hero-waterfall.png" alt="A child sitting on a rock beside a small wooded waterfall in John Hinkel Park, a sketchbook open on their knee, ferns and oaks around — quick watercolor-and-ink journal style.">
+      <figcaption>Sitting by the falls, sketchbook on a knee — that's all it takes to begin.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- WHY -->
+  <section aria-labelledby="why-title">
+    <h2 id="why-title">Why draw what we see?</h2>
+    <p>You don't have to be an artist, and neither does your child. As naturalist Clare Walker
+      Leslie puts it in <em>Keeping a Nature Journal</em>, drawing in nature isn't about making
+      a pretty picture — it's a way of <strong>learning to see</strong>. A drawing slows a child
+      down until they notice the things a photograph races past: how many points are on that
+      oak leaf, which way the water folds over the rock, what the light is doing.</p>
+    <p>It's an old practice. Long before cameras, the people who taught us about the natural
+      world — <strong>John James Audubon, John Muir, Beatrix Potter</strong> — looked closely
+      and drew what they saw. And the quiet attention it asks for is the same kind of calm your
+      group already feels listening to the falls: time spent in nature
+      <a href="https://www.apa.org/monitor/2020/04/nurtured-nature">improves attention, lifts
+      mood, and lowers stress</a> for kids and grown-ups alike.</p>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- THE FIRST DRAWING (centerpiece) -->
+  <section aria-labelledby="first-title">
+    <h2 id="first-title">At the Waterfall: the First Drawing</h2>
+    <p>Find a comfortable seat on a rock or log near the water. The whole thing takes about
+      <strong>15–20 minutes</strong> and folds right into the listening pause your hike guide
+      already includes. Keep it light — there is no wrong way to do this.</p>
+
+    <figure class="plate">
+      <img src="assets/illustrations/first-drawing.png" alt="An open journal page resting on a mossy stone by the creek, showing a quick sketch of a fern frond and falling water, with a hand-lettered header reading the date and 'John Hinkel Park'.">
+      <figcaption>A first page: a date, a place, one fern, and a wondering.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li><strong>Listen first.</strong> Close your eyes and listen to the water for a minute or
+        two — the same pause your group already takes. Ask: <em>what do you hear, besides the
+        water?</em></li>
+      <li><strong>Write the header.</strong> At the top of the page, write the
+        <strong>date</strong>, the <strong>place</strong> (John Hinkel Park), the
+        <strong>weather</strong>, and how the air feels. This is how every nature-journal page
+        begins.</li>
+      <li><strong>Pick just one thing.</strong> Not the whole scene — one small thing close by:
+        a fern frond, a wet stone, a fallen <strong>coast live oak</strong> or
+        <strong>bay laurel</strong> leaf, or the shape the water makes as it falls.</li>
+      <li><strong>Look longer than you draw.</strong> Spend more time looking at the thing than
+        at the paper. Let the pencil follow your eyes slowly.</li>
+      <li><strong>Add a few words.</strong> Next to the drawing, jot one thing you
+        <em>notice</em> and one thing you <em>wonder</em> — "I notice the fern curls at the tip.
+        I wonder why it's so green here."</li>
+    </ol>
+
+    <div class="note">
+      <span class="label">A word for grown-ups</span>
+      It will not look "right," and that's exactly right. Resist the urge to fix it or draw it
+      for them. The goal isn't a good drawing — it's a child who looked closely at one real
+      thing in their own city. Praise the <em>looking</em>, not the picture.
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- PRINCIPLES -->
+  <section aria-labelledby="keep-title">
+    <h2 id="keep-title">Keep Going: How to Start a Nature Journal</h2>
+    <p>That single drawing at the falls can become the first page of a nature journal. A journal
+      is just a plain notebook your child returns to — at the next Club hike, in the backyard,
+      on the walk to school. Here are the principles that make it work, drawn from Clare Walker
+      Leslie's approach. They work anywhere, not just at John Hinkel.</p>
+
+    <ol class="principles">
+      <li>
+        <h3>Pick a Sit Spot</h3>
+        <p>Choose one comfortable place to settle and stay a while — a rock by the creek, a
+          bench under an oak, a spot with a view of the Bay. Stillness is what lets the noticing
+          begin.</p>
+        <p class="try">Try it: sit for two quiet minutes before the pencil comes out.</p>
+      </li>
+      <li>
+        <h3>Start Every Page the Same Way</h3>
+        <p>Date, place, weather. Always. It turns a doodle into a record, and over time those
+          headers become a map of where your child has been and how the seasons turned.</p>
+        <p class="try">Try it: make the header a habit — it's the "ready, set" of every page.</p>
+      </li>
+      <li>
+        <h3>Look First, Then Draw</h3>
+        <p>The secret to drawing is really just looking. Study the thing — its shape, edges, and
+          parts — before and while the pencil moves.</p>
+        <p class="try">Try it: spend twice as long looking as drawing.</p>
+      </li>
+      <li>
+        <h3>Drawing Is for Seeing — Not for Perfect</h3>
+        <p>Quick, rough, and unfinished is good. A nature journal is a thinking tool, not an art
+          gallery. Messy pages mean real looking happened.</p>
+        <p class="try">Try it: give each sketch only a few minutes, then move on.</p>
+      </li>
+      <li>
+        <h3>Use Words, Pictures, and Numbers Together</h3>
+        <p>Draw the leaf, name it if you can, and count things: 5 points, 3 birds, 2 o'clock.
+          Words and numbers around a sketch capture what a picture alone can't.</p>
+        <p class="try">Try it: add one number to every page.</p>
+      </li>
+      <li>
+        <h3>Get Curious</h3>
+        <p>The most important words in a nature journal are <em>I notice…</em>,
+          <em>I wonder…</em>, and <em>It reminds me of…</em>. Questions are more valuable than
+          answers — they're what pull you back outside.</p>
+        <p class="try">Try it: end every page with one "I wonder" question.</p>
+      </li>
+      <li>
+        <h3>Add Color and the Little Details</h3>
+        <p>When there's time, add color and the small "field marks" that make a thing itself —
+          the red flash on a bird's wing, the white underside of a bay leaf.</p>
+        <p class="try">Try it: pack a few colored pencils and color just one detail.</p>
+      </li>
+      <li>
+        <h3>Return to the Same Places</h3>
+        <p>Come back to a favorite spot again and again — your hike guide already suggests
+          returning to Mortar Rock with family. Watch one oak through Berkeley's
+          <strong>green, wet winter</strong> and its <strong>golden, dry summer</strong>. The
+          same place is never the same twice.</p>
+        <p class="try">Try it: draw one tree this month, then again next season.</p>
+      </li>
+    </ol>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- PACK -->
+  <section aria-labelledby="pack-title">
+    <h2 id="pack-title">What to Pack</h2>
+    <p>Everything fits in the daypack you already bring on the hike:</p>
+    <ul class="pack">
+      <li>A small, sturdy notebook (plain paper is best)</li>
+      <li>A pencil — and an eraser you mostly won't need</li>
+      <li>A few colored pencils (optional)</li>
+      <li>Something hard to lean on</li>
+      <li>Water</li>
+      <li>Orange slices for the trail</li>
+    </ul>
+    <figure class="plate">
+      <img src="assets/illustrations/supplies.png" alt="A simple flat-lay of nature-journal supplies on a daypack: a small notebook, a pencil, a few colored pencils, a water bottle, and orange slices — quick watercolor-and-ink style.">
+      <figcaption>A notebook, a pencil, and a bit of curiosity.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- EXPLORE NEXT -->
+  <section aria-labelledby="explore-title">
+    <h2 id="explore-title">Where to Explore Next</h2>
+    <p>A nature journal travels well. Bring it on the Club's other outings and watch the pages
+      fill with the different corners of the East Bay:</p>
+    <ul class="explore">
+      <li>Indian Rock Park</li>
+      <li>Tilden &amp; Lake Anza</li>
+      <li>Albany Bulb</li>
+      <li>Berkeley Marina</li>
+      <li>Your own backyard</li>
+    </ul>
+    <figure class="plate plate--wide">
+      <img src="assets/illustrations/explore-next-strip.png" alt="A strip of four small watercolor-and-ink vignettes: the boulders of Indian Rock, a calm Tilden lake, the Albany Bulb shoreline, and the John Hinkel Park waterfall.">
+      <figcaption>One journal, many places.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- PARENT TIPS -->
+  <section aria-labelledby="tips-title">
+    <h2 id="tips-title">Tips for Parents</h2>
+    <ul>
+      <li><strong>Keep it short.</strong> Five honest minutes beats a forced half hour.</li>
+      <li><strong>Model it.</strong> Pull out your own page and draw alongside them — badly, on
+        purpose. It gives them permission.</li>
+      <li><strong>Don't correct the art.</strong> Ask "what did you notice?" instead of "is that
+        what it really looks like?"</li>
+      <li><strong>Let them choose the subject.</strong> A bug they love beats a landscape you
+        picked.</li>
+      <li><strong>Wonder out loud.</strong> Your curiosity is contagious.</li>
+    </ul>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- CHECKLIST -->
+  <section aria-labelledby="check-title">
+    <h2 id="check-title">First-Page Checklist</h2>
+    <p>Tick these off at the waterfall:</p>
+    <ul class="checklist">
+      <li>We found a comfortable seat and listened to the water.</li>
+      <li>We wrote the date, place, and weather at the top.</li>
+      <li>We each picked one small thing to draw.</li>
+      <li>We looked longer than we drew.</li>
+      <li>We wrote one "I notice" and one "I wonder."</li>
+    </ul>
+    <div class="note">
+      <span class="label">On the walk home</span>
+      The group is picked up at the end of Somerset Place about 90 minutes after setting out.
+      On the way, ask your child: <em>what's one thing you noticed today that you'd never
+      noticed before?</em> That question is the whole practice in a nutshell.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="free">Our parks and paths are free, and they belong to everyone.</p>
+  <p>Berkeley Natural Explorers Club<br>
+    A companion to the <a href="https://docs.google.com/document/d/1Os_305FlSzASQqErScfKdkemsM5RRhRpv_DJerFxeVg/edit">Thousand Oaks → John Hinkel Park hike guide</a>.</p>
+  <p>Journaling principles adapted from <em>Keeping a Nature Journal</em> by Clare Walker Leslie.</p>
+</footer>
+
+</body>
+</html>
