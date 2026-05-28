@@ -19,3 +19,6 @@ naturejournal.bundle
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Local workflow tool (not published)
+studio.html
