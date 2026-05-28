@@ -24,22 +24,33 @@ python3 -m http.server   # then visit http://localhost:8000  (recommended — re
 open index.html
 ```
 
-## Adding the artwork (delegated to image models)
+## The image workflow (delegated to Gemini / ChatGPT)
 
 The page references illustrations in `assets/illustrations/` that don't exist yet. **Until an
 image is added, the page gracefully shows its alt text in a soft framed box** — never a broken
-image. So the site stays presentable at every stage.
+image. So the site stays presentable at every stage, and you can fill art in over time.
 
-To add art **without spending Claude tokens on image generation**, hand the prompts to an
-image-capable model (Gemini, ChatGPT/DALL·E, etc.):
+Image *generation* is delegated to image-capable models so **no Claude tokens are spent making
+pictures**. The loop:
 
-1. Open `IMAGE-PROMPTS.md`.
-2. For each slot, prepend the **Global Style Preamble**, paste the slot's prompt into your
-   image model, and generate at the listed aspect ratio.
-3. Export as **PNG** and save into `assets/illustrations/` using the **exact filename** listed.
-   The page picks it up automatically — no code change needed.
+1. **See what's needed** — `bin/art-status.sh` lists the slots still missing art.
+2. **Generate** — open `IMAGE-PROMPTS.md`, prepend the **Global Style Preamble** to a slot's
+   prompt, and paste it into **Gemini** and **ChatGPT** at the listed aspect ratio. Generate
+   a few candidates in each.
+3. **Pick** — eyeball the candidates and choose your favorite (keep it anywhere, e.g.
+   `~/Downloads/`).
+4. **Publish** — promote your pick in one command:
+   ```bash
+   bin/add-art.sh hero-waterfall.png ~/Downloads/my-favorite.png
+   ```
+   It copies the file in with the correct name, commits, and pushes. GitHub Pages republishes
+   automatically (~1 min). Inside Claude Code you can instead run
+   `/add-art hero-waterfall.png ~/Downloads/my-favorite.png`.
 
-Keep the palette consistent across images so the page reads as one set.
+Keep the palette consistent across images so the page reads as one set. The four slots the page
+uses today: `hero-waterfall.png`, `first-drawing.png`, `supplies.png`, `explore-next-strip.png`.
+`logo.png` and the eight `principle-*.png` vignettes have prompts ready in `IMAGE-PROMPTS.md`
+and can be wired in if you want more art.
 
 ## Hosting (GitHub Pages)
 
