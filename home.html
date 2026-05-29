@@ -106,17 +106,17 @@
   .wordmark {
     font-family: var(--display);
     font-weight: 700;
-    font-size: clamp(1.9rem, 6vw, 2.9rem);
     color: var(--forest);
     letter-spacing: .5px;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    gap: .55rem;
-    line-height: 1;
+    gap: .08rem;
+    line-height: .9;
   }
-  /* Inline SVG emblem (oak leaf + waterfall) so the masthead reads even before
-     the generated logo art is dropped in. */
-  .emblem { width: 1.6em; height: 1.6em; flex: 0 0 auto; }
+  /* Inline SVG emblem (hills + sun + oak crest) stacked above the two-line wordmark. */
+  .emblem { width: 4.6rem; height: 4.6rem; margin-bottom: .35rem; }
+  .wordmark .wm-line { display: block; font-size: clamp(2.15rem, 8.5vw, 3.2rem); }
   .masthead .kicker {
     font-family: var(--serif);
     font-style: italic;
@@ -332,20 +332,21 @@
 
 <header class="masthead">
   <div class="wordmark">
-    <!-- Oak-leaf + waterfall emblem. Replace with assets/illustrations/logo.png when generated. -->
-    <svg class="emblem" viewBox="0 0 64 64" role="img" aria-label="Oak leaf and waterfall emblem">
-      <g fill="none" stroke="#445235" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M32 6 C 26 14, 20 14, 16 20 C 22 20, 24 24, 20 30 C 26 28, 28 32, 26 38 C 31 34, 33 38, 32 44"/>
-        <path d="M32 6 C 38 14, 44 14, 48 20 C 42 20, 40 24, 44 30 C 38 28, 36 32, 38 38 C 33 34, 31 38, 32 44"/>
-        <path d="M32 44 L 32 58"/>
+    <svg class="emblem" viewBox="0 0 80 80" role="img" aria-label="Berkeley Natural Explorers Club emblem: Berkeley hills, a rising sun, an oak, and a creek in a roundel">
+      <circle cx="40" cy="40" r="36" fill="#fbf7ec" stroke="#445235" stroke-width="2.4"/>
+      <circle cx="40" cy="28" r="6.5" fill="none" stroke="#c9a23f" stroke-width="2.2"/>
+      <path d="M9 50 Q 26 36 40 47 Q 55 37 71 50" fill="none" stroke="#6b7d52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="none" stroke="#445235" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M26 49 L 26 41"/>
+        <path d="M26 41 C 21 41, 20 35, 25 34 C 24 30, 29 29, 31 32 C 34 30, 38 33, 35 37 C 38 39, 34 43, 30 41Z"/>
       </g>
-      <g fill="none" stroke="#8fa9b8" stroke-width="2" stroke-linecap="round">
-        <path d="M22 52 q 4 4 0 8"/>
-        <path d="M32 52 q 4 4 0 8"/>
-        <path d="M42 52 q 4 4 0 8"/>
+      <g fill="none" stroke="#8fa9b8" stroke-width="1.9" stroke-linecap="round">
+        <path d="M44 56 q 5 4 0 8"/>
+        <path d="M53 56 q 5 4 0 8"/>
       </g>
     </svg>
-    <span>Berkeley Natural Explorers Club</span>
+    <span class="wm-line">Berkeley Natural</span>
+    <span class="wm-line">Explorers Club</span>
   </div>
   <p class="kicker">Getting Berkeley kids outside</p>
   <nav class="series" aria-label="In this guide">
