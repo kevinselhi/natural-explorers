@@ -1,7 +1,8 @@
 # Illustration & Image Generation Guide
 
-These are ready-to-paste prompts for generating the illustrations used on the
-"Your First Nature Drawing" page (`index.html`) for the **Berkeley Natural Explorers Club**.
+These are ready-to-paste prompts for generating the illustrations used across the
+**Berkeley Natural Explorers Club** pages — "Your First Nature Drawing" (`index.html`)
+and "Take the Trail Together," the reading-buddy hike (`reading-buddy-hike.html`).
 
 The art should match the look of *Keeping a Nature Journal* by Clare Walker Leslie — loose,
 hand-drawn, and clearly made by a person, not a machine — while being localized to **John
@@ -94,6 +95,33 @@ sculpture, (4) the small John Hinkel Park waterfall among ferns. Consistent pale
 four; tiny hand-lettered labels under each.
 **Used as:** "Where to Explore Next" illustration.
 **Alt text:** "A strip of four small watercolor-and-ink vignettes: the boulders of Indian Rock, a calm Tilden lake, the Albany Bulb shoreline, and the John Hinkel Park waterfall."
+
+---
+
+## Reading-buddy hike slots (`reading-buddy-hike.html`)
+
+Same Global Style Preamble applies — prepend it to each. Keep the palette and loose
+hand-made look consistent with the slots above so all the pages read as one set. Keep
+children's faces generic and gentle.
+
+### 14. Reading-buddy hero — `reading-buddies-trail.png`
+**Aspect ratio:** 16:9 (wide)
+**Prompt:** Two children walking a gentle wooded Berkeley trail together — an older child of
+about 9–10 a step ahead, half-turned and pointing the way forward, and a younger child of
+about 5–6 following close behind, looking where they point. Coast live oaks and ferns around
+them, dappled morning light, a hint of a creek to one side. Warm and companionable; the older
+one is clearly the guide. Quick watercolor-and-ink journal style.
+**Used as:** hero illustration.
+**Alt text:** "Two children walking a wooded Berkeley trail together, the older child pointing the way ahead while the younger one follows close behind, dappled light through coast live oaks — loose watercolor-and-ink journal style."
+
+### 15. Reading on a rock — `read-on-a-rock.png`
+**Aspect ratio:** 4:3
+**Prompt:** An older child and a younger child sitting close together on a flat creekside rock
+in dappled light, the older one holding an open picture book and reading aloud while the little
+one leans in to look at the pages. A small creek or the foot of a little waterfall just behind
+them, ferns and mossy stones around. Tender and quiet. Quick watercolor-and-ink journal style.
+**Used as:** "Read on the Trail" illustration.
+**Alt text:** "An older child and a younger child sitting together on a flat creekside rock in dappled light, the older one reading aloud from a picture book while the little one leans in to look — loose watercolor-and-ink journal style."
 
 ---
 

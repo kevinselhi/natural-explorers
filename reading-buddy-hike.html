@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Take the Trail Together · Berkeley Natural Explorers Club</title>
+<meta name="description" content="A Berkeley Natural Explorers Club invitation for Thousand Oaks families: take your child and their reading buddy on an easy hike to John Hinkel Park, where the older buddy leads and the two read together by the creek.">
+
+<!-- Fonts: handwritten display (Caveat) + readable serif (Lora). Robust system fallbacks
+     are declared in CSS in case the network blocks Google Fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Paper + ink */
+    --paper:        #f7f1e3;
+    --paper-light:  #fbf7ec;
+    --ink:          #3a3327;
+    --ink-soft:     #5d5443;
+
+    /* East Bay oak-woodland palette */
+    --sage:    #6b7d52;
+    --forest:  #445235;
+    --ochre:   #c9a23f;
+    --clay:    #b5654a;
+    --creek:   #8fa9b8;
+
+    --rule:    #d8ccae;
+
+    --display: "Caveat", "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+    --serif:   "Lora", Georgia, "EB Garamond", "Times New Roman", serif;
+
+    --measure: 42rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: var(--serif);
+    color: var(--ink);
+    line-height: 1.62;
+    font-size: 1.06rem;
+    /* Warm paper with the faintest grain via layered radial gradients. */
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(201,162,63,0.05), transparent 42%),
+      radial-gradient(circle at 82% 8%,  rgba(107,125,82,0.06), transparent 40%),
+      radial-gradient(circle at 60% 88%, rgba(143,169,184,0.06), transparent 45%);
+    background-attachment: fixed;
+    overflow-x: hidden; /* guard against the tilted plates nudging horizontal scroll on mobile */
+  }
+
+  /* ----- Layout ----- */
+  .wrap {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+  }
+
+  section { margin: 3.25rem 0; }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    color: var(--forest);
+    line-height: 1.08;
+    font-weight: 700;
+    margin: 0 0 .5rem;
+  }
+  h1 { font-size: clamp(2.6rem, 8vw, 4rem); }
+  h2 { font-size: clamp(2rem, 5.5vw, 2.9rem); color: var(--clay); }
+  h3 { font-size: clamp(1.45rem, 4vw, 1.8rem); color: var(--forest); }
+
+  p { margin: 0 0 1rem; }
+  a { color: var(--clay); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--forest); }
+  strong { color: var(--ink); }
+
+  /* ----- Masthead ----- */
+  .masthead {
+    text-align: center;
+    padding: 2.5rem 1.25rem 1.5rem;
+    border-bottom: 2px dashed var(--rule);
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 6vw, 2.9rem);
+    color: var(--forest);
+    letter-spacing: .5px;
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    line-height: 1;
+  }
+  /* Inline SVG emblem (oak leaf + waterfall) so the masthead reads even before
+     the generated logo art is dropped in. */
+  .emblem { width: 1.6em; height: 1.6em; flex: 0 0 auto; }
+  .masthead .kicker {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: .95rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: .35rem 0 0;
+  }
+
+  /* ----- Series nav (shared with index.html & hike.html) ----- */
+  .series {
+    margin-top: .8rem;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: .2rem .6rem;
+    font-family: var(--display);
+    font-size: 1.25rem;
+  }
+  .series a { color: var(--sage); text-decoration: none; padding: .25rem .45rem; border-radius: 4px; }
+  .series a:hover { color: var(--forest); text-decoration: underline; }
+  .series .here {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--ochre);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+  .series .sep { color: var(--rule); }
+
+  /* ----- Dated entry header strip (recurring journal motif) ----- */
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem 1.4rem;
+    font-family: var(--display);
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+    border-top: 1.5px solid var(--rule);
+    border-bottom: 1.5px solid var(--rule);
+    padding: .5rem .2rem;
+    margin: 1rem 0 1.75rem;
+  }
+  .entry-head span { white-space: nowrap; }
+  .entry-head b { color: var(--clay); font-weight: 700; }
+
+  /* ----- Hero ----- */
+  .hero h1 { color: var(--forest); }
+  .subtitle {
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 4.5vw, 2rem);
+    color: var(--clay);
+    margin: -.15rem 0 .6rem;
+    line-height: 1.1;
+  }
+  .lede { font-size: 1.2rem; }
+
+  /* ----- Illustration cards (taped-in sketch look) ----- */
+  figure.plate {
+    margin: 1.75rem 0;
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .6rem .6rem 0;
+    box-shadow: 0 6px 18px rgba(58,51,39,0.10);
+    transform: rotate(-0.5deg);
+  }
+  figure.plate:nth-of-type(even) { transform: rotate(0.6deg); }
+  figure.plate img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    /* Graceful empty state: until the art is generated, the alt text sits in a
+       soft framed box rather than a broken-image icon. */
+    min-height: 120px;
+    background: repeating-linear-gradient(
+      45deg, rgba(107,125,82,0.06), rgba(107,125,82,0.06) 10px,
+      rgba(201,162,63,0.06) 10px, rgba(201,162,63,0.06) 20px);
+    color: var(--ink-soft);
+    font-family: var(--display);
+    font-size: 1.05rem;
+    line-height: 1.3;
+  }
+  figure.plate figcaption {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    text-align: center;
+    padding: .4rem .3rem .7rem;
+  }
+  .plate--wide { transform: none; }
+  .plate--wide:nth-of-type(even) { transform: none; }
+
+  /* ----- Cards / callouts ----- */
+  .note {
+    background: rgba(143,169,184,0.14);
+    border-left: 4px solid var(--creek);
+    border-radius: 3px;
+    padding: .9rem 1.1rem;
+    margin: 1.5rem 0;
+  }
+  .note .label {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    color: var(--creek);
+    display: block;
+    margin-bottom: .1rem;
+  }
+  /* Grown-up / guide variant (clay) */
+  .note.guide { background: rgba(181,101,74,0.12); border-left-color: var(--clay); }
+  .note.guide .label { color: var(--clay); }
+  /* "Still to confirm" variant — an obvious ochre flag for placeholder logistics
+     Kevin will fill in. Easy to spot and delete once the real details land. */
+  .note.todo { background: rgba(201,162,63,0.16); border-left-color: var(--ochre); }
+  .note.todo .label { color: var(--ochre); }
+  .note.todo b { color: var(--clay); }
+
+  /* ----- Reasons ("Why it's worth a Saturday") ----- */
+  .reasons { list-style: none; padding: 0; margin: 1.5rem 0; }
+  .reasons > li {
+    position: relative;
+    padding: 1.1rem 1.1rem 1.1rem 3.2rem;
+    margin: 0 0 1rem;
+    background: var(--paper-light);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .reasons > li::before {
+    content: "✦";
+    position: absolute;
+    left: 1.1rem; top: 1rem;
+    color: var(--ochre);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .reasons h3 { margin: 0 0 .25rem; }
+  .reasons p { margin: 0; }
+
+  /* Step list (how to set it up) */
+  ol.steps { padding-left: 1.3rem; }
+  ol.steps li { margin: 0 0 .8rem; padding-left: .3rem; }
+
+  /* ----- Copy-ready message to send (no JS: select-to-copy) ----- */
+  .sendnote {
+    background: var(--paper-light);
+    border: 1.5px dashed var(--sage);
+    border-radius: 5px;
+    padding: 1rem 1.15rem;
+    margin: 1.25rem 0;
+  }
+  .sendnote .label {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    color: var(--sage);
+    display: block;
+    margin-bottom: .35rem;
+  }
+  .sendnote p { margin: 0; font-style: italic; color: var(--ink); }
+
+  /* Pack / checklist */
+  .checklist { list-style: none; padding: 0; margin: 1.25rem 0; }
+  .checklist li { padding-left: 2rem; position: relative; margin: 0 0 .6rem; }
+  .checklist li::before {
+    content: ""; position: absolute; left: 0; top: .2em;
+    width: 1.1rem; height: 1.1rem; border: 2px solid var(--sage); border-radius: 3px;
+    background: var(--paper-light);
+  }
+
+  /* Hand-drawn divider */
+  .divider {
+    border: 0;
+    height: 22px;
+    margin: 2.75rem auto;
+    width: 70%;
+    background: no-repeat center / contain;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='22' viewBox='0 0 400 22'%3E%3Cpath d='M2 12 C 60 2, 120 22, 180 11 S 300 2, 398 12' fill='none' stroke='%236b7d52' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+
+  /* Footer */
+  footer {
+    border-top: 2px dashed var(--rule);
+    padding: 2rem 1.25rem 3rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: .95rem;
+  }
+  footer .free {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    color: var(--sage);
+    margin-bottom: .5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    figure.plate, figure.plate:nth-of-type(even) { transform: none; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .plate, .note, .sendnote { box-shadow: none; }
+    a { color: var(--ink); }
+    .series { display: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="wordmark">
+    <!-- Oak-leaf + waterfall emblem. Replace with assets/illustrations/logo.png when generated. -->
+    <svg class="emblem" viewBox="0 0 64 64" role="img" aria-label="Oak leaf and waterfall emblem">
+      <g fill="none" stroke="#445235" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 6 C 26 14, 20 14, 16 20 C 22 20, 24 24, 20 30 C 26 28, 28 32, 26 38 C 31 34, 33 38, 32 44"/>
+        <path d="M32 6 C 38 14, 44 14, 48 20 C 42 20, 40 24, 44 30 C 38 28, 36 32, 38 38 C 33 34, 31 38, 32 44"/>
+        <path d="M32 44 L 32 58"/>
+      </g>
+      <g fill="none" stroke="#8fa9b8" stroke-width="2" stroke-linecap="round">
+        <path d="M22 52 q 4 4 0 8"/>
+        <path d="M32 52 q 4 4 0 8"/>
+        <path d="M42 52 q 4 4 0 8"/>
+      </g>
+    </svg>
+    <span>Berkeley Natural Explorers Club</span>
+  </div>
+  <p class="kicker">An invitation for Thousand Oaks reading buddies</p>
+  <nav class="series" aria-label="In this guide">
+    <a href="hike.html">The Hike</a>
+    <span class="sep" aria-hidden="true">✦</span>
+    <a href="index.html">First Nature Drawing</a>
+    <span class="sep" aria-hidden="true">✦</span>
+    <a href="reading-buddy-hike.html" class="here" aria-current="page">Reading-Buddy Hike</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Take the Trail Together</h1>
+    <p class="subtitle">A reading-buddy hike for Thousand Oaks families</p>
+    <div class="entry-head" aria-hidden="true">
+      <span><b>Who:</b> a big buddy + a little buddy</span>
+      <span><b>Where:</b> John Hinkel Park</span>
+      <span><b>When:</b> a Saturday morning</span>
+      <span><b>Bring:</b> one good book</span>
+    </div>
+    <p class="lede">Your child already has a reading buddy at school. Now picture that
+      friendship out on a trail — the older one leading the way, the little one keeping up,
+      a book tucked in the pack for a rest by the creek. It's one of the sweetest, easiest
+      adventures a Thousand Oaks family can have on a Saturday morning.</p>
+
+    <figure class="plate plate--wide">
+      <img src="assets/illustrations/reading-buddies-trail.png" alt="Two children walking a wooded Berkeley trail together, the older child pointing the way ahead while the younger one follows close behind, dappled light through coast live oaks — loose watercolor-and-ink journal style.">
+      <figcaption>Big buddy leads, little buddy follows — out where the classroom opens up.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- THE INVITATION -->
+  <section aria-labelledby="invite-title">
+    <h2 id="invite-title">The Invitation</h2>
+    <p>The reading-buddy bond is one of the warmest things that happens at Thousand Oaks —
+      a 3rd or 4th grader paired with a younger student, reading together week after week.
+      This is a way to take that friendship out of the classroom and into the Berkeley hills
+      for a morning.</p>
+    <p>Here's the heart of it: <strong>the older child gets to lead.</strong> They find the
+      trail, watch out for the little one, and point things out along the way — the bend in
+      the creek, a banana slug, the sound of the waterfall up ahead. The younger buddy gets a
+      real adventure with the big kid they already look up to. Two kids, two families, one
+      easy walk.</p>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- WHY IT'S WORTH A SATURDAY -->
+  <section aria-labelledby="why-title">
+    <h2 id="why-title">Why It's Worth a Saturday</h2>
+    <ul class="reasons">
+      <li>
+        <h3>Calmer, happier kids</h3>
+        <p>Time outside genuinely settles children. Green space and the sound of running
+          water <a href="https://www.apa.org/monitor/2020/04/nurtured-nature">improve
+          attention, lift mood, and lower stress</a> — for the grown-ups too.</p>
+      </li>
+      <li>
+        <h3>A chance to lead</h3>
+        <p>The older buddy is the guide, not the follower. Looking out for a younger child on
+          a trail is real leadership, and they'll feel themselves rise to it.</p>
+      </li>
+      <li>
+        <h3>Two families, one morning</h3>
+        <p>A hike is a low-stakes, no-host way for two sets of parents to meet — walking side
+          by side beats making small talk across a table.</p>
+      </li>
+      <li>
+        <h3>It starts to feel like theirs</h3>
+        <p>When kids explore Berkeley's parks and paths, they begin to feel the hills and
+          trails belong to them. Our parks are free and for everyone — this is how kids come
+          to know that in their feet.</p>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- THE HIKE -->
+  <section aria-labelledby="hike-title">
+    <h2 id="hike-title">The Hike: John Hinkel Park</h2>
+    <p>John Hinkel Park is a gentle, green pocket tucked into the north Berkeley hills — easy
+      enough for little legs and short enough that nobody melts down. The payoff at the far
+      corner is lovely: a creek and a small <strong>waterfall</strong>, a <strong>historic
+      stone amphitheater</strong> with wide steps to sit on, and tall <strong>redwoods</strong>
+      that make the whole place feel hushed and cool. There's a playground for the little one
+      to blow off steam, too.</p>
+    <p>Keep it as short as your group wants — the walk to the waterfall is easy and flat enough
+      for a 5-year-old. If you'd rather start even closer to home, <strong>Indian Rock</strong>
+      and <strong>Great Stoneface Park</strong> are nearby alternatives with their own boulders
+      to scramble, but John Hinkel's waterfall and amphitheater make it the perfect
+      reading-buddy spot.</p>
+
+    <div class="note todo">
+      <span class="label">Getting there</span>
+      <b>[TO CONFIRM — Kevin]</b> Add the park address, where families should park, and quick
+      driving/biking directions here, plus roughly how long the walk from the entrance to the
+      waterfall takes. I left this blank rather than guess — the existing hike guide only
+      covers the 90-minute school-to-park walk and pickup at Somerset Place, not a family
+      arriving by car.
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- READ ON THE TRAIL -->
+  <section aria-labelledby="read-title">
+    <h2 id="read-title">A Reading-Buddy Twist: Read on the Trail</h2>
+    <p>Here's the part that makes it <em>your</em> hike: bring one picture book, or a couple of
+      chapters of whatever they're reading together. When you reach the creek, find a flat rock
+      or settle onto the amphitheater steps, and let the buddies read — the big one reading
+      aloud to the little one, or the two of them trading pages, with the water as the
+      soundtrack.</p>
+
+    <figure class="plate">
+      <img src="assets/illustrations/read-on-a-rock.png" alt="An older child and a younger child sitting together on a flat creekside rock in dappled light, the older one reading aloud from a picture book while the little one leans in to look — loose watercolor-and-ink journal style.">
+      <figcaption>A book, a flat rock, and the creek for a soundtrack.</figcaption>
+    </figure>
+
+    <div class="note">
+      <span class="label">One more small thing</span>
+      Afterward, if the kids want to keep going, our companion page walks you through helping
+      them make a <a href="index.html"><strong>first nature drawing</strong></a> — draw the
+      one thing they noticed by the water and tuck it into a notebook. It grows into a nature
+      journal they'll keep long after the walk home.
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- MAKE IT EASY -->
+  <section aria-labelledby="easy-title">
+    <h2 id="easy-title">Make It Easy</h2>
+    <p>You don't need much. Tick these into a daypack and you're set for a weekend morning:</p>
+    <ul class="checklist">
+      <li>Water for everyone</li>
+      <li>A snack (orange slices travel well)</li>
+      <li>A layer each — the hills run cool, even in summer</li>
+      <li>Sturdy shoes that can handle a little dirt</li>
+      <li>One good book to read together</li>
+      <li>Optional: a small notebook and a pencil</li>
+    </ul>
+    <div class="note guide">
+      <span class="label">Two quick basics</span>
+      Keep both kids within sight near the creek and any road crossings, and the older buddy
+      can be your helper there. Sun, water, and a snack cover almost everything else — this is
+      a short, gentle outing, not an expedition.
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- HOW TO SET IT UP -->
+  <section aria-labelledby="setup-title">
+    <h2 id="setup-title">How to Set It Up</h2>
+    <p>The whole thing comes down to one text message. Here's the literal next action:</p>
+    <ol class="steps">
+      <li><strong>This week, text your buddy's parent.</strong> You already have a reason —
+        the kids are reading buddies.</li>
+      <li><strong>Pick a Saturday morning.</strong> No need to plan far ahead; sooner is better
+        than perfect.</li>
+      <li><strong>Meet at the park entrance.</strong> Walk in together and let the big buddy
+        lead the way to the waterfall.</li>
+    </ol>
+
+    <div class="sendnote">
+      <span class="label">Copy &amp; send</span>
+      <p>"Hi! [Kid] and [buddy] are reading buddies — want to bring them on a short, easy hike
+        at John Hinkel Park some Saturday morning? The kids would love it and it's gorgeous.
+        They can even read together by the creek."</p>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- ABOUT THE CLUB -->
+  <section aria-labelledby="club-title">
+    <h2 id="club-title">About the Club</h2>
+    <p>The <strong>Berkeley Natural Explorers Club</strong> helps Berkeley kids get out into
+      the city's parks and trails — building belonging, well-being, and a little leadership
+      along the way. A reading-buddy hike is one of our favorite ways to start, because the
+      older child gets to lead and two families get to connect.</p>
+    <p>Make this the first of many. There's a whole East Bay out there — and it belongs to your
+      kids as much as anyone's.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p class="free">Our parks and paths are free, and they belong to everyone.</p>
+  <p>Berkeley Natural Explorers Club<br>
+    A companion to the <a href="hike.html">Thousand Oaks → John Hinkel Park hike guide</a>
+    and <a href="index.html">Your First Nature Drawing</a>.</p>
+</footer>
+
+</body>
+</html>
