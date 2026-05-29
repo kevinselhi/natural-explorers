@@ -52,11 +52,12 @@ Read `CLAUDE.md` in full. It is the contract. Pay special attention to:
 This is what keeps the site improving. After shipping:
 - Open `preview.html`. If a `ROUNDS` entry corresponds to the decision you just resolved, **remove it**
   (it's settled).
-- **Audit the live site for 2–3 concrete, high-value design/content choices worth offering next** —
-  e.g. a section that reads long, a weak hero/caption, an inconsistent spacing, a palette tweak, a
-  clearer CTA, a missing page improvement. For each, **append a new round** to the `ROUNDS` array using
-  the documented schema (`id, title, subject, intro, context, variants:[{key,label,desc,html}]`), with
-  2–3 real variants rendered in the site tokens. Keep proposals small and genuinely useful — not busywork.
+- **Audit the live site and pick the SINGLE highest-value design/content choice worth offering next** —
+  e.g. a section that reads long, a weak hero/caption, inconsistent spacing, a palette tweak, a clearer
+  CTA. **Append exactly ONE new round** to the `ROUNDS` array using the documented schema
+  (`id, title, subject, intro, context, variants:[{key,label,desc,html}]`), with 2–3 real *variants* of
+  that one decision, rendered in the site tokens. **Never add more than one round per run** — one change
+  per evolution. preview.html should hold a single round at a time. Keep it small and genuinely useful.
 - Commit + push `preview.html` (after `git pull --ff-only`).
 
 ## Guardrails (important)
@@ -70,5 +71,5 @@ This is what keeps the site improving. After shipping:
 ## Your return value
 Return a concise summary for the orchestrator to post on the issue:
 1. **What shipped** (files changed, the commit, the live URL).
-2. **New options surfaced** in preview.html (round titles + one-line each).
+2. **The one new option** surfaced in preview.html (its title + one line).
 3. Or, if you didn't implement: exactly **what clarification** you need.

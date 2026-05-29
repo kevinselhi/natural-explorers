@@ -157,32 +157,9 @@ const ROUNDS = [
         html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--forest);background:transparent;border:2px solid var(--forest);border-radius:6px;padding:.45rem 1.2rem;text-decoration:none">Open the hike guide →</a>`
       }
     ]
-  },
-
-  {
-    id: 'section-divider',
-    title: 'Section divider',
-    subject: 'the hand-drawn .divider flourish between sections on every page',
-    intro: 'The little mark between sections, repeated down every page. Which best fits the journal feel?',
-    context: 'plain',
-    variants: [
-      {
-        key: 'A', label: 'Wavy line (current)',
-        desc: 'The hand-drawn sage squiggle the site uses now.',
-        html: `<svg width="70%" height="22" viewBox="0 0 400 22" style="display:block;margin:.4rem auto"><path style="fill:none;stroke:var(--sage);stroke-width:2.2;stroke-linecap:round" d="M2 12 C 60 2, 120 22, 180 11 S 300 2, 398 12"/></svg>`
-      },
-      {
-        key: 'B', label: 'Oak sprig',
-        desc: 'A small coast-live-oak leaf between two faint rules — more botanical.',
-        html: `<div style="display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.4rem 0"><span style="height:1.5px;width:28%;background:var(--rule)"></span><svg width="34" height="34" viewBox="0 0 64 64"><path style="fill:none;stroke:var(--forest);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round" d="M32 8 C 26 16, 20 16, 16 22 C 22 22, 24 26, 20 32 C 26 30, 28 34, 26 40 C 31 36, 33 40, 32 46 M32 8 C 38 16, 44 16, 48 22 C 42 22, 40 26, 44 32 C 38 30, 36 34, 38 40 C 33 36, 31 40, 32 46 M32 46 L32 58"/></svg><span style="height:1.5px;width:28%;background:var(--rule)"></span></div>`
-      },
-      {
-        key: 'C', label: 'Three marks',
-        desc: 'Three small ✦ marks — minimal and quiet.',
-        html: `<div style="text-align:center;color:var(--ochre);font-size:1.3rem;letter-spacing:.8rem;margin:.4rem 0">✦ ✦ ✦</div>`
-      }
-    ]
   }
+  // One decision at a time: keep a SINGLE round here. The site-evolver appends the
+  // next single round after each pick is shipped (one change per evolution).
 ];
 
 /* ---------- rendering engine (generic — usually no need to touch) ---------- */

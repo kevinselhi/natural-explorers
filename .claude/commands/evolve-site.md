@@ -20,7 +20,8 @@ Run from the repo root (`/Users/kevinselhi/natural-explorers`). The repo is `kev
    Skip any that already carry the `site-evolved` label. If none remain, report "Nothing to evolve —
    no open `evolve` issues" and stop.
 
-3. **For each issue** (oldest first, one at a time):
+3. **Process exactly ONE issue per run** — the **oldest** open `evolve` issue (one change per evolution;
+   any others wait for the next run). For that single issue:
    a. Read it fully, including comments: `gh issue view <N> --repo kevinselhi/natural-explorers --comments`.
    b. **Dispatch the `site-evolver` subagent** (via the Agent tool) with the issue number, title, body,
       and comments as context. It implements the change across the pages, verifies, pushes, and appends
@@ -34,9 +35,9 @@ Run from the repo root (`/Users/kevinselhi/natural-explorers`). The repo is `kev
    d. **If the subagent asked for clarification** (did not implement): post its question as a comment and
       **leave the issue open** (do not relabel/close), so Kevin can respond. Move on.
 
-4. **Report** back: which issues were shipped (with the live URL
-   `https://kevinselhi.github.io/natural-explorers/`), and the new option rounds now waiting in
-   `preview.html` for Kevin to pick from next.
+4. **Report** back: the one issue shipped (with the live URL
+   `https://kevinselhi.github.io/natural-explorers/`), the single new option round now waiting in
+   `preview.html`, and how many `evolve` issues remain for future runs.
 
 ## Notes
 - Only issues labeled `evolve` are ever acted on — this is the explicit opt-in (preview.html picks add it

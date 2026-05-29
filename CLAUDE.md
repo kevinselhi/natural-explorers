@@ -120,12 +120,13 @@ The site improves itself in a human-gated loop, with `preview.html` as the choos
    GitHub issue **auto-labeled `evolve`** (that label is the only trigger — unlabeled issues are never
    touched, so anything you're handling yourself is safe).
 2. **Pick** — Kevin taps a variant (and/or adds tweaks in the issue). His pick *is* the approval.
-3. **Evolve** — `/evolve-site` (run manually, or by a **daily scheduled routine**) finds open
-   `evolve` issues and, for each, dispatches the **`site-evolver` subagent**
-   (`.claude/agents/site-evolver.md`). The subagent implements the change across the five pages per
-   these conventions, compresses images if needed, verifies, **pushes to live**, then **appends the
-   next round of options to `preview.html`** (removing the resolved one). The command then comments
-   the summary on the issue, relabels it `evolve → site-evolved`, and closes it.
+3. **Evolve** — `/evolve-site` (run manually, or by a **daily scheduled routine**) takes the **single
+   oldest** open `evolve` issue (**one change per evolution** — any others wait for the next run) and
+   dispatches the **`site-evolver` subagent** (`.claude/agents/site-evolver.md`). The subagent
+   implements that change across the five pages per these conventions, compresses images if needed,
+   verifies, **pushes to live**, then **appends exactly one new round** to `preview.html` (removing the
+   resolved one — preview.html holds a single round at a time). The command then comments the summary on
+   the issue, relabels it `evolve → site-evolved`, and closes it.
 4. **Repeat** — the new rounds wait in `preview.html` for the next pick.
 
 Components: `.claude/commands/evolve-site.md` (orchestrator), `.claude/agents/site-evolver.md`
