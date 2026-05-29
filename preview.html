@@ -130,37 +130,59 @@
 const REPO = 'kevinselhi/natural-explorers';
 
 const ROUNDS = [
-  // ---- EXAMPLE ROUND (footer wording) — edit or delete freely -------------
-  // Shows the tool working on something other than the masthead. Each variant
-  // renders inside the footer chrome (context:'footer').
+  // Real decisions worth weighing. Each variant renders live in the site tokens;
+  // picking one files an `evolve`-labeled issue and the daily routine ships it.
+  // (Footer wording is intentionally not here — it's already in flight as issue #17.)
+
   {
-    id: 'footer-signoff',
-    title: 'Footer sign-off',
-    subject: 'the footer sign-off line across all five pages',
-    intro: 'Three takes on the closing line. Pick the voice that feels most like the club.',
-    context: 'footer',
+    id: 'cta-button',
+    title: 'Primary button style',
+    subject: 'the .cta "Open the hike guide" button shared by home.html, reading-buddy-hike.html, and bridge.html',
+    intro: 'The big call-to-action that sends families to the hike guide. Same handwritten label — three looks.',
+    context: 'plain',
     variants: [
       {
-        key: 'A', label: 'Free & for everyone (current)',
-        desc: 'The line the site ships today — plain and civic.',
-        html: `<p class="free">Our parks and paths are free, and they belong to everyone.</p>
-               <p>Berkeley Natural Explorers Club</p>`
+        key: 'A', label: 'Sage fill (current)',
+        desc: 'Solid sage-green button — what the site ships today.',
+        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--paper);background:var(--sage);border-radius:6px;padding:.5rem 1.25rem;text-decoration:none;box-shadow:0 4px 12px rgba(58,51,39,.14)">Open the hike guide →</a>`
       },
       {
-        key: 'B', label: 'Invitation',
-        desc: 'Warmer, a touch more inviting — leans on belonging.',
-        html: `<p class="free">The hills are yours. Come find them.</p>
-               <p>Berkeley Natural Explorers Club</p>`
+        key: 'B', label: 'Terracotta fill',
+        desc: 'Warmer clay fill — reads friendlier and a touch more "tap me".',
+        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--paper);background:var(--clay);border-radius:6px;padding:.5rem 1.25rem;text-decoration:none;box-shadow:0 4px 12px rgba(58,51,39,.14)">Open the hike guide →</a>`
       },
       {
-        key: 'C', label: 'Mission-forward',
-        desc: 'States the why up front.',
-        html: `<p class="free">Getting Berkeley kids outside, together.</p>
-               <p>Berkeley Natural Explorers Club</p>`
+        key: 'C', label: 'Outlined (quieter)',
+        desc: 'Forest outline on paper — calmer, lets the illustrations lead.',
+        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--forest);background:transparent;border:2px solid var(--forest);border-radius:6px;padding:.45rem 1.2rem;text-decoration:none">Open the hike guide →</a>`
+      }
+    ]
+  },
+
+  {
+    id: 'section-divider',
+    title: 'Section divider',
+    subject: 'the hand-drawn .divider flourish between sections on every page',
+    intro: 'The little mark between sections, repeated down every page. Which best fits the journal feel?',
+    context: 'plain',
+    variants: [
+      {
+        key: 'A', label: 'Wavy line (current)',
+        desc: 'The hand-drawn sage squiggle the site uses now.',
+        html: `<svg width="70%" height="22" viewBox="0 0 400 22" style="display:block;margin:.4rem auto"><path style="fill:none;stroke:var(--sage);stroke-width:2.2;stroke-linecap:round" d="M2 12 C 60 2, 120 22, 180 11 S 300 2, 398 12"/></svg>`
+      },
+      {
+        key: 'B', label: 'Oak sprig',
+        desc: 'A small coast-live-oak leaf between two faint rules — more botanical.',
+        html: `<div style="display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.4rem 0"><span style="height:1.5px;width:28%;background:var(--rule)"></span><svg width="34" height="34" viewBox="0 0 64 64"><path style="fill:none;stroke:var(--forest);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round" d="M32 8 C 26 16, 20 16, 16 22 C 22 22, 24 26, 20 32 C 26 30, 28 34, 26 40 C 31 36, 33 40, 32 46 M32 8 C 38 16, 44 16, 48 22 C 42 22, 40 26, 44 32 C 38 30, 36 34, 38 40 C 33 36, 31 40, 32 46 M32 46 L32 58"/></svg><span style="height:1.5px;width:28%;background:var(--rule)"></span></div>`
+      },
+      {
+        key: 'C', label: 'Three marks',
+        desc: 'Three small ✦ marks — minimal and quiet.',
+        html: `<div style="text-align:center;color:var(--ochre);font-size:1.3rem;letter-spacing:.8rem;margin:.4rem 0">✦ ✦ ✦</div>`
       }
     ]
   }
-  // ---- Add more rounds below (masthead, palette, buttons, …) --------------
 ];
 
 /* ---------- rendering engine (generic — usually no need to touch) ---------- */
