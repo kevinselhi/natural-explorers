@@ -23,3 +23,6 @@ naturejournal.bundle
 # Local workflow tool (not published)
 studio.html
 photo-studio.html
+
+# Image-compression tool's private Pillow venv (bin/compress-images.sh)
+bin/.venv-img/
