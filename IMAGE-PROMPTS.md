@@ -21,6 +21,13 @@ Hinkel Park and the Berkeley hills**.
 
 Keep filenames exactly as written — `index.html` looks for these specific paths.
 
+> **Every page needs its own hero (it doubles as the social share card).** Each page's first
+> wide hero image is also its Open Graph / Twitter preview — the card shown when the link is
+> shared in iMessage/Slack/social. So a **new page must add its own new 16:9 hero slot here**
+> (don't reuse another page's hero as the card), generate it at **16:9 landscape** (≥1200×630),
+> and wire it into that page's `og:image`/`twitter:image` via the absolute Pages URL. See
+> CLAUDE.md → "Page hero & social share card (required on every page)".
+
 ---
 
 ## Global Style Preamble (prepend to EVERY prompt)

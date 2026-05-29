@@ -99,6 +99,29 @@ references exact filenames — match them precisely, and give every `<img>` mean
 - **Brand motifs are the design language:** dated journal-entry headers, taped-in "plate" figures
   rotated a fraction of a degree, hand-drawn SVG dividers/emblems, the shared series-nav bar. Match
   these rather than introducing generic web-UI patterns. Content tone is warm and parent-facing.
+- **Page hero & social share card (required on every page).** *This is a hard rule — every page,
+  including every new one, must satisfy it.* Each page has exactly **one distinct hero**: the first
+  `figure.plate.plate--wide` in its `<main>`, a **landscape 16:9** image (≥1200×630; the illustrated
+  heroes are 1600×900 / 1672×941). That same hero **doubles as the page's social share card** — the
+  rich preview shown when the link is pasted into iMessage, Slack, WhatsApp, or social. So each page's
+  `<head>` carries an **Open Graph + Twitter Card block** (`og:type/site_name/title/description/url/
+  image` + `og:image:width/height/alt`, `twitter:card=summary_large_image` + title/description/image)
+  whose `og:image`/`twitter:image` point at that page's hero via the **absolute** Pages URL
+  (`https://kevinselhi.github.io/natural-explorers/…` — relative paths don't work for share scrapers),
+  with page-specific `og:title`, `og:description`, and `og:url`. Every page also links the shared
+  `assets/favicon.svg` (the oak-leaf + waterfall emblem). Rules of thumb:
+    - **One hero per page, not shared.** A new page gets its **own new** hero slot — don't reuse
+      another page's hero as the card. Add the new hero's filename + prompt to `IMAGE-PROMPTS.md`
+      (16:9), matching the existing `*-hero` / `*-trail` naming.
+    - **Keep `og:image:width/height` honest** — set them to the real pixel dimensions so previews
+      render immediately.
+    - The block travels for free when you clone an existing page (below) — just **update every
+      per-page value**: title, description, `og:url`, the hero filename in both image tags, and the
+      width/height/alt. (Exception: `hike.html` is the photo page; its hero/card is a Kevin Selhi
+      photo. Its current hero is portrait — a landscape hike share image is a nice future upgrade.)
 - **When adding a new page to the series:** reuse the existing tokens, fonts-with-fallbacks, image
-  contract, accessibility/print blocks, and series nav — don't reinvent the styling — and add it to
-  the series-nav bar on the other pages.
+  contract, accessibility/print blocks, and series nav — don't reinvent the styling; add it to the
+  series-nav bar on the other pages; **and give it its own distinct 16:9 hero plus the Open Graph /
+  Twitter share block and favicon link described above** (new hero slot + prompt in `IMAGE-PROMPTS.md`,
+  absolute `og:image`, page-specific `og:title`/`og:description`/`og:url`). Cloning the closest
+  existing page carries the share block along — then update its per-page values.
