@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview &amp; Pick · Berkeley Natural Explorers Club</title>
+<!--
+  PREVIEW & PICK — a reusable, config-driven design-review tool for the whole site.
+  (Successor to the old masthead-only picker; not restricted to mastheads.)
+
+  Use it for ANY site-wide decision: masthead, footer, colour palette, button
+  style, typography, a new section layout — anything you want to see options for
+  and choose between from your phone.
+
+  HOW IT WORKS
+    • Everything you preview lives in the ROUNDS array near the bottom of this file.
+    • Each "round" is one decision; each "variant" is one option, rendered LIVE in
+      the real site design tokens so what you see is what you'll get.
+    • Tapping "Pick this" opens a pre-filled GitHub issue — just hit Submit and
+      Claude builds the chosen option across the pages.
+
+  TO PREVIEW SOMETHING NEW
+    Edit ROUNDS (schema is documented right above it). No need to touch the
+    rendering/issue-link machinery — that's generic. Then open this file:
+        python3 -m http.server   →   http://localhost:8000/preview.html
+    (or just open the published copy on your phone and tap a choice).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<style>
+  /* Shared site design tokens — keep in sync with the pages' :root. */
+  :root{
+    --paper:#f7f1e3; --paper-light:#fbf7ec; --ink:#3a3327; --ink-soft:#5d5443;
+    --sage:#6b7d52; --forest:#445235; --ochre:#c9a23f; --clay:#b5654a; --creek:#8fa9b8; --rule:#d8ccae;
+    --display:"Caveat","Bradley Hand","Segoe Print","Comic Sans MS",cursive;
+    --serif:"Lora",Georgia,"EB Garamond","Times New Roman",serif;
+    --fraunces:"Fraunces",Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;
+    background-image:radial-gradient(circle at 18% 22%,rgba(201,162,63,.05),transparent 42%),
+                     radial-gradient(circle at 82% 8%,rgba(107,125,82,.06),transparent 40%);}
+
+  .page-intro{max-width:40rem;margin:0 auto;padding:1.6rem 1.25rem .25rem;text-align:center;border-bottom:2px dashed var(--rule);}
+  .page-intro h1{font-family:var(--display);color:var(--forest);font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .2rem;}
+  .page-intro p{font-size:.95rem;color:var(--ink-soft);margin:.2rem 0;}
+
+  .round{max-width:40rem;margin:2.4rem auto 0;padding:0 1.25rem;}
+  .round > h2{font-family:var(--display);color:var(--clay);font-size:clamp(1.7rem,6vw,2.3rem);margin:0 0 .2rem;}
+  .round > .round-intro{font-size:.95rem;color:var(--ink-soft);margin:0 0 .4rem;}
+
+  .variant{margin:1.2rem 0;background:var(--paper-light);border:1px solid var(--rule);border-radius:8px;
+    overflow:hidden;box-shadow:0 6px 18px rgba(58,51,39,.08);}
+  .variant .tag{font-family:var(--display);font-size:1.4rem;color:var(--clay);padding:.55rem .9rem .05rem;}
+  .variant .desc{font-size:.9rem;color:var(--ink-soft);padding:0 .9rem .55rem;}
+
+  /* The "stage" renders a variant's real HTML. Context classes set the right chrome. */
+  .stage{background:var(--paper);border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);padding:1.8rem 1rem;}
+  .stage--masthead{text-align:center;}
+  .stage--footer{text-align:center;border-top:2px dashed var(--rule);color:var(--ink-soft);font-size:.95rem;}
+  .stage--plain{}
+
+  .pick{text-align:center;padding:.85rem 1rem 1.05rem;}
+  .pick a{display:inline-block;font-family:var(--display);font-size:1.45rem;color:var(--paper);background:var(--sage);
+    border-radius:8px;padding:.5rem 1.6rem;text-decoration:none;box-shadow:0 4px 12px rgba(58,51,39,.16);}
+  .pick a:hover,.pick a:active{background:var(--forest);}
+
+  .mix{text-align:center;margin:.6rem 0 0;}
+  .mix a{font-family:var(--display);font-size:1.2rem;color:var(--clay);}
+
+  footer.note{max-width:40rem;margin:2.5rem auto 3rem;padding:0 1.25rem;text-align:center;color:var(--ink-soft);font-size:.85rem;font-style:italic;}
+
+  /* ---- Helper styles so common previews look real without re-declaring them ---- */
+  /* Masthead bits */
+  .wm{font-family:var(--display);font-weight:700;color:var(--forest);line-height:.92;}
+  .wm .l1,.wm .l2{display:block;font-size:clamp(2.1rem,8.5vw,3rem);}
+  .emblem{width:84px;height:84px;display:block;margin:0 auto .45rem;}
+  .faux-nav{font-family:var(--display);font-size:1.05rem;color:var(--sage);margin-top:.6rem;}
+  .faux-nav .sep{color:var(--rule);}
+  /* Footer bits */
+  .free{font-family:var(--display);font-size:1.3rem;color:var(--sage);margin:0 0 .4rem;}
+</style>
+</head>
+<body>
+
+<div class="page-intro">
+  <h1>Preview &amp; Pick</h1>
+  <p>Options for site-wide changes, rendered in the real design. <strong>Tap the green “Pick this”</strong>
+     under your favorite — it opens a pre-filled GitHub issue; just hit <em>Submit</em>.</p>
+  <p>Not just for mastheads: footers, colors, buttons, layouts — anything. New rounds are added by editing
+     the <code>ROUNDS</code> config in this file.</p>
+</div>
+
+<main id="app"><!-- rendered from ROUNDS by the script below --></main>
+
+<footer class="note">
+  This is a local design tool, not a club page. Add or edit decisions in the <code>ROUNDS</code> array in
+  <code>preview.html</code>.
+</footer>
+
+<script>
+/* ============================================================================
+   CONFIG
+   ============================================================================
+   REPO       — owner/name, used to build the GitHub "new issue" links.
+
+   ROUNDS     — one entry per decision. Schema:
+     {
+       id:      'masthead',                 // short slug (anchor / issue label)
+       title:   'Pick the masthead',        // shown as the round heading
+       subject: 'the masthead across all five pages',  // used in the issue body
+       intro:   'one-line explainer (optional)',
+       context: 'masthead' | 'footer' | 'plain',       // chrome for the stage
+       variants: [
+         {
+           key:   'A',                      // short id shown in the tag + issue
+           label: 'Refined oak leaf',       // human name
+           desc:  'why this option / what it is',
+           html:  `<div class="wm">…</div>` // REAL markup, rendered live in tokens
+         },
+         …
+       ]
+     }
+
+   To preview something new: copy a round, swap in your variants' `html`, done.
+   The "Pick this" link and the "describe a mix/tweak" link are generated for you.
+   ============================================================================ */
+
+const REPO = 'kevinselhi/natural-explorers';
+
+const ROUNDS = [
+  // ---- EXAMPLE ROUND (footer wording) — edit or delete freely -------------
+  // Shows the tool working on something other than the masthead. Each variant
+  // renders inside the footer chrome (context:'footer').
+  {
+    id: 'footer-signoff',
+    title: 'Footer sign-off',
+    subject: 'the footer sign-off line across all five pages',
+    intro: 'Three takes on the closing line. Pick the voice that feels most like the club.',
+    context: 'footer',
+    variants: [
+      {
+        key: 'A', label: 'Free & for everyone (current)',
+        desc: 'The line the site ships today — plain and civic.',
+        html: `<p class="free">Our parks and paths are free, and they belong to everyone.</p>
+               <p>Berkeley Natural Explorers Club</p>`
+      },
+      {
+        key: 'B', label: 'Invitation',
+        desc: 'Warmer, a touch more inviting — leans on belonging.',
+        html: `<p class="free">The hills are yours. Come find them.</p>
+               <p>Berkeley Natural Explorers Club</p>`
+      },
+      {
+        key: 'C', label: 'Mission-forward',
+        desc: 'States the why up front.',
+        html: `<p class="free">Getting Berkeley kids outside, together.</p>
+               <p>Berkeley Natural Explorers Club</p>`
+      }
+    ]
+  }
+  // ---- Add more rounds below (masthead, palette, buttons, …) --------------
+];
+
+/* ---------- rendering engine (generic — usually no need to touch) ---------- */
+function issueUrl(title, body){
+  return `https://github.com/${REPO}/issues/new`
+       + `?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+}
+function el(tag, cls, html){
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (html != null) n.innerHTML = html;
+  return n;
+}
+function render(){
+  const app = document.getElementById('app');
+  if (!ROUNDS.length){ app.appendChild(el('p', 'round-intro', 'No rounds configured yet — add one to ROUNDS.')); return; }
+
+  for (const round of ROUNDS){
+    const sec = el('section', 'round'); sec.id = round.id || '';
+    sec.appendChild(el('h2', null, round.title || 'Untitled decision'));
+    if (round.intro) sec.appendChild(el('p', 'round-intro', round.intro));
+
+    for (const v of (round.variants || [])){
+      const card = el('div', 'variant');
+      card.appendChild(el('div', 'tag', `${v.key ? v.key + ' · ' : ''}${v.label || ''}`));
+      if (v.desc) card.appendChild(el('div', 'desc', v.desc));
+
+      const stage = el('div', `stage stage--${round.context || 'plain'}`, v.html || '');
+      card.appendChild(stage);
+
+      const title = `${round.title}: ${v.key || ''} — ${v.label || ''}`.trim();
+      const body  = `Build option ${v.key || ''} — “${v.label || ''}” for ${round.subject || round.title}.\n\n`
+                  + (v.desc ? `(${v.desc})\n\n` : '')
+                  + `Tweaks (optional): `;
+      const pick = el('div', 'pick');
+      const a = el('a', null, 'Pick this →');
+      a.href = issueUrl(title, body); a.target = '_blank'; a.rel = 'noopener';
+      pick.appendChild(a);
+      card.appendChild(pick);
+      sec.appendChild(card);
+    }
+
+    // per-round "describe a mix / tweak" escape hatch
+    const mix = el('div', 'mix');
+    const ma = el('a', null, 'None quite right? Describe a mix or tweak →');
+    ma.href = issueUrl(
+      `${round.title}: mix / tweak`,
+      `I'd like a mix or change for ${round.subject || round.title}. Describe it here: `
+    );
+    ma.target = '_blank'; ma.rel = 'noopener';
+    mix.appendChild(ma);
+    sec.appendChild(mix);
+
+    app.appendChild(sec);
+  }
+}
+render();
+</script>
+
+</body>
+</html>
