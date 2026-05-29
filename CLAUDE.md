@@ -109,7 +109,7 @@ references exact filenames — match them precisely, and give every `<img>` mean
   whose `og:image`/`twitter:image` point at that page's hero via the **absolute** Pages URL
   (`https://kevinselhi.github.io/natural-explorers/…` — relative paths don't work for share scrapers),
   with page-specific `og:title`, `og:description`, and `og:url`. Every page also links the shared
-  `assets/favicon.svg` (the oak-leaf + waterfall emblem). Rules of thumb:
+  `assets/favicon.svg` (the hills, sun & oak crest emblem, matching the masthead). Rules of thumb:
     - **One hero per page, not shared.** A new page gets its **own new** hero slot — don't reuse
       another page's hero as the card. Add the new hero's filename + prompt to `IMAGE-PROMPTS.md`
       (16:9), matching the existing `*-hero` / `*-trail` naming.
