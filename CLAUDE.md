@@ -96,7 +96,7 @@ automates exactly this** — it's the canonical way to apply this convention; se
 
 ## Local dev tools
 
-Beyond the two image studios (above), two general tools support the workflow. Both keep Kevin
+Beyond the two image studios (above), three general tools support the workflow. They keep Kevin
 (non-coding, often reviewing on a phone) in control without hand-editing:
 
 - **`preview.html`** — a reusable **"Preview & Pick"** page (tracked & published, so it can be opened
@@ -105,6 +105,12 @@ Beyond the two image studios (above), two general tools support the workflow. Bo
   and its variants; each variant renders **live in the real design tokens**, and the engine
   auto-builds a "Pick this →" link that opens a pre-filled **GitHub issue** Claude can act on (plus a
   "describe a mix/tweak" link). To preview something new, you only edit `ROUNDS` — never the engine.
+  This is the **ship-a-change** interface — it feeds the self-evolution loop below.
+- **`tuner.html`** — a reusable **"Tune the Evolver"** page (tracked & published). The **train-taste**
+  companion to preview.html: it lists up to 15 improvement *ideas* + focus-area chips; rating them
+  (👍/👎 and which areas matter) files one `tuner-feedback` issue that the `preview-tuner` distills into
+  `.claude/evolve-preferences.md`. Edit its `SUGGESTIONS`/`AREAS` config to change what's rated (the
+  preview-tuner rewrites these each round). **Never edits the site** — see "Taste-training layer" below.
 - **`bin/compress-images.sh`** (slash command **`/compress-images`**) — finds images over budget
   (file > 1500 KB or longest edge > 1600 px) across `assets/illustrations/` + `assets/photos/`,
   rewrites them smaller **in place** (preserving filenames), then commits + pushes (like
