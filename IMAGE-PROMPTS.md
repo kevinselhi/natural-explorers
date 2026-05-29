@@ -1,9 +1,9 @@
 # Illustration & Image Generation Guide
 
 These are ready-to-paste prompts for generating the illustrations used across the
-**Berkeley Natural Explorers Club** pages — "Your First Nature Drawing" (`index.html`),
-"Take the Trail Together," the reading-buddy hike (`reading-buddy-hike.html`), and
-"Bridge to Middle School" (`bridge.html`).
+**Berkeley Natural Explorers Club** pages — the landing page (`home.html`), "Your First Nature
+Drawing" (`index.html`), "Take the Trail Together," the reading-buddy hike (`reading-buddy-hike.html`),
+and "Bridge to Middle School" (`bridge.html`).
 
 The art should match the look of *Keeping a Nature Journal* by Clare Walker Leslie — loose,
 hand-drawn, and clearly made by a person, not a machine — while being localized to **John
@@ -136,6 +136,24 @@ side. Warm and reassuring; the older kid is a trusted guide, not a teacher. Quic
 watercolor-and-ink journal style.
 **Used as:** hero illustration.
 **Alt text:** "An older child walking a wooded Berkeley trail with two younger children who look up at them listening, a small footbridge over a creek to one side, dappled light through coast live oaks — loose watercolor-and-ink journal style."
+
+---
+
+## Landing-page slots (`home.html`)
+
+Same Global Style Preamble applies — prepend it. Keep the palette and loose hand-made look
+consistent with the slots above. (The landing page also reuses the existing `explore-next-strip.png`
+for its "how it started" section — no new art needed there.)
+
+### 16. Landing-page hero — `home-hero.png`
+**Aspect ratio:** 16:9 (wide)
+**Prompt:** A small group of three or four children of mixed ages and one parent walking a gentle
+Berkeley hillside trail among coast live oaks and golden grass, seen from a little behind so we
+follow them into the scene. In the distance, a glimpse of San Francisco Bay and the Golden Gate
+Bridge under an open sky. Warm, welcoming, and unhurried — a whole community out exploring together.
+Quick watercolor-and-ink journal style.
+**Used as:** hero illustration.
+**Alt text:** "A small group of children and a parent walking a Berkeley hillside trail among coast live oaks, with a distant glimpse of the Bay and the Golden Gate Bridge — loose watercolor-and-ink journal style."
 
 ---
 

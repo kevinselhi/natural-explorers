@@ -5,9 +5,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A small, self-contained static site for the **Berkeley Natural Explorers Club**, companion to the
-club's **Thousand Oaks → John Hinkel Park** hike. There are **four published pages**, designed as a
-linked series (a shared series-nav bar at the top of each links to the others):
+club's **Thousand Oaks → John Hinkel Park** hike. There are **five published pages**, designed as a
+linked series (a shared series-nav bar at the top of each links to the others; `home.html` is the
+landing page and the first item in that nav):
 
+- **`home.html`** — *the landing page / program overview.* "Berkeley Is Your Backyard." A warm,
+  parent-facing front door to the club: the three founding goals, how it started (Spring 2023, the
+  founding Thousand Oaks → John Hinkel Park hike) and what was learned, plus a **guide directory**
+  (a `.guides` card grid) linking the four companion pages and explaining how to navigate the series.
+  Deliberately public-facing — omits internal/forward-vision material. Same design system; adds one
+  illustration slot (`home-hero.png`) and reuses the existing `explore-next-strip.png`.
 - **`index.html`** — *"Your First Nature Drawing."* A parent-facing guide to leading a child's first
   nature drawing at the park waterfall and growing it into a nature journal. Content and visual style
   are adapted from *Keeping a Nature Journal* by Clare Walker Leslie.
@@ -57,7 +64,7 @@ There are **two parallel tracks**, each with a local studio, a publish script, a
 
 | Track | Slots live in | Filetype | Local studio (gitignored) | Publish script | Slash command |
 |-------|---------------|----------|---------------------------|----------------|---------------|
-| **Illustrations** | `index.html`, `reading-buddy-hike.html`, `bridge.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
+| **Illustrations** | `home.html`, `index.html`, `reading-buddy-hike.html`, `bridge.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
 | **Photos** (© Kevin Selhi) | `hike.html` | `.jpg` in `assets/photos/` | `photo-studio.html` | `bin/publish-photos.sh` | `/publish-photos` |
 
 - **Studios** (`studio.html`, `photo-studio.html`) are **local workflow tools, gitignored, not part of
