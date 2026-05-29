@@ -1,7 +1,8 @@
 # Illustrations
 
-Drop the generated PNG illustrations here. The page (`../../index.html`) references these
-exact filenames, so names must match. See `../../IMAGE-PROMPTS.md` for the prompt for each one.
+Drop the generated PNG illustrations here. The pages (`../../index.html`,
+`../../reading-buddy-hike.html`, and `../../bridge.html`) reference these exact filenames, so
+names must match. See `../../IMAGE-PROMPTS.md` for the prompt for each one.
 
 Until a file is added, the page shows the image's alt text in a soft framed box (no broken
 image icons) — so it stays presentable while the art is still being made.
@@ -23,6 +24,8 @@ Expected files:
 | `principle-8-seasons.png` | Principle 8 — Return to the Same Places |
 | `supplies.png` | What to Pack |
 | `explore-next-strip.png` | Where to Explore Next |
+| `reading-buddies-trail.png` | Reading Buddies — hero (also reused on Bridge to Middle School) |
+| `mentor-bridge-trail.png` | Bridge to Middle School — hero |
 
 > Note: the current `index.html` embeds the hero, first-drawing, supplies, and explore-strip
 > images plus the masthead emblem. The per-principle vignettes (`principle-*.png`) have prompts

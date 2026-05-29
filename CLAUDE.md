@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A small, self-contained static site for the **Berkeley Natural Explorers Club**, companion to the
-club's **Thousand Oaks → John Hinkel Park** hike. There are **three published pages**, designed as a
+club's **Thousand Oaks → John Hinkel Park** hike. There are **four published pages**, designed as a
 linked series (a shared series-nav bar at the top of each links to the others):
 
 - **`index.html`** — *"Your First Nature Drawing."* A parent-facing guide to leading a child's first
@@ -20,6 +20,14 @@ linked series (a shared series-nav bar at the top of each links to the others):
   the premise; the on-trail "extra" is an optional nature drawing at the waterfall. Same design system
   and image contract; cross-links to both other pages (hard CTA to `hike.html`). Adds one illustration
   slot (`reading-buddies-trail.png`) and reuses the existing `hero-waterfall.png`.
+- **`bridge.html`** — *"Bridge to Middle School."* Another parent-facing **pitch for the `hike.html`
+  hike** (not a new trip): an invitation to ease a child's 5th→6th grade transition by bringing an
+  older kid — a current middle schooler / former Thousand Oaks student the child looks up to — along
+  on the existing hike as a low-key trail mentor for the younger ones. The buddy/mentorship premise
+  is the frame; the on-trail "extra" is again an optional nature drawing at the waterfall. Same design
+  system and image contract; hard CTA to `hike.html`, cross-links `reading-buddy-hike.html` and
+  `index.html`. Adds one illustration slot (`mentor-bridge-trail.png`) and reuses the existing
+  `hero-waterfall.png` and `reading-buddies-trail.png`.
 
 There is **no build step, no JS framework, and no dependencies.** Each page is one HTML file with an
 embedded `<style>` block. The site is deployed via **GitHub Pages** from the repo root on every push
@@ -40,7 +48,7 @@ from the larger `treehousedads/kevin` repo) — it's no longer the source of tru
 
 ## The image / photo workflow (no Claude tokens spent on art)
 
-Both pages reference images that may not exist yet. **CSS on the image figures renders a missing file
+The pages reference images that may not exist yet. **CSS on the image figures renders a missing file
 as its `alt`/caption text in a soft framed box, never a broken-image icon** — so the site stays
 presentable at every stage and art can be filled in over time. *Do not "fix" missing images by
 deleting the tags; the graceful empty state is intentional.*
@@ -49,7 +57,7 @@ There are **two parallel tracks**, each with a local studio, a publish script, a
 
 | Track | Slots live in | Filetype | Local studio (gitignored) | Publish script | Slash command |
 |-------|---------------|----------|---------------------------|----------------|---------------|
-| **Illustrations** | `index.html`, `reading-buddy-hike.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
+| **Illustrations** | `index.html`, `reading-buddy-hike.html`, `bridge.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
 | **Photos** (© Kevin Selhi) | `hike.html` | `.jpg` in `assets/photos/` | `photo-studio.html` | `bin/publish-photos.sh` | `/publish-photos` |
 
 - **Studios** (`studio.html`, `photo-studio.html`) are **local workflow tools, gitignored, not part of
