@@ -250,16 +250,28 @@
   /* ----- Guide directory (landing-page card grid linking the four companion pages) ----- */
   .guides { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 1rem; }
   @media (min-width: 34rem) { .guides { grid-template-columns: 1fr 1fr; } }
-  .guides > li {
+  .guides > li { display: flex; }
+  /* Whole card is one tappable link (not just the title). */
+  .guides .guide-card {
+    display: block;
+    width: 100%;
     background: var(--paper-light);
     border: 1px solid var(--rule);
     border-radius: 4px;
     padding: 1.1rem 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s ease, box-shadow .15s ease;
   }
-  .guides h3 { margin: 0 0 .3rem; }
-  .guides h3 a { text-decoration: none; color: var(--forest); }
-  .guides h3 a:hover { color: var(--clay); text-decoration: underline; }
-  .guides p { margin: 0; font-size: 1rem; }
+  .guides .guide-card:hover,
+  .guides .guide-card:focus-visible {
+    border-color: var(--sage);
+    box-shadow: 0 4px 14px rgba(58,51,39,0.12);
+  }
+  .guides h3 { margin: 0 0 .3rem; color: var(--forest); }
+  .guides .guide-card:hover h3,
+  .guides .guide-card:focus-visible h3 { color: var(--clay); }
+  .guides p { margin: 0; font-size: 1rem; color: var(--ink); }
 
   /* Big call-to-action link to the hike guide */
   .cta {
@@ -461,25 +473,33 @@
 
     <ul class="guides">
       <li>
-        <h3><a href="hike.html">The Hike</a></h3>
-        <p>Our founding route, mapped stop by stop: Thousand Oaks Elementary up the Indian Rock Path
-          to the John Hinkel Park waterfall — history, plant ID, and a real rock to climb. The best
-          place to begin.</p>
+        <a class="guide-card" href="hike.html">
+          <h3>The Hike</h3>
+          <p>Our founding route, mapped stop by stop: Thousand Oaks Elementary up the Indian Rock Path
+            to the John Hinkel Park waterfall — history, plant ID, and a real rock to climb. The best
+            place to begin.</p>
+        </a>
       </li>
       <li>
-        <h3><a href="index.html">Your First Nature Drawing</a></h3>
-        <p>A gentle guide to helping a child make their very first nature drawing at the waterfall —
-          and grow it into a journal they'll keep.</p>
+        <a class="guide-card" href="index.html">
+          <h3>Your First Nature Drawing</h3>
+          <p>A gentle guide to helping a child make their very first nature drawing at the waterfall —
+            and grow it into a journal they'll keep.</p>
+        </a>
       </li>
       <li>
-        <h3><a href="reading-buddy-hike.html">Reading Buddies</a></h3>
-        <p>Take your child and their younger reading buddy on the hike together, and let the older
-          one lead the way. Two kids, two families, one easy morning.</p>
+        <a class="guide-card" href="reading-buddy-hike.html">
+          <h3>Reading Buddies</h3>
+          <p>Take your child and their younger reading buddy on the hike together, and let the older
+            one lead the way. Two kids, two families, one easy morning.</p>
+        </a>
       </li>
       <li>
-        <h3><a href="bridge.html">Bridge to Middle School</a></h3>
-        <p>Bring an older kid along as a low-key trail mentor to ease a younger one's jump from fifth
-          grade to middle school.</p>
+        <a class="guide-card" href="bridge.html">
+          <h3>Bridge to Middle School</h3>
+          <p>Bring an older kid along as a low-key trail mentor to ease a younger one's jump from fifth
+            grade to middle school.</p>
+        </a>
       </li>
     </ul>
 
