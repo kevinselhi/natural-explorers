@@ -17,8 +17,10 @@ The orchestrator gives you a GitHub issue: its number, title, body, and any comm
 usually encodes a pick (e.g. `Footer sign-off: C — Mission-forward`); the body may add tweaks;
 comments may add feedback. **Treat the issue + comments as the instruction.**
 
-## Step 1 — Learn the conventions (always, first)
-Read `CLAUDE.md` in full. It is the contract. Pay special attention to:
+## Step 1 — Learn the conventions and Kevin's taste (always, first)
+Read `CLAUDE.md` in full (the contract) **and `.claude/evolve-preferences.md`** (the learned taste
+profile maintained by the `preview-tuner` from Kevin's ratings). Let the preferences steer your judgment
+— especially which next round you surface in Step 5. In CLAUDE.md, pay special attention to:
 - the **five pages** (`home.html`, `index.html`, `hike.html`, `reading-buddy-hike.html`, `bridge.html`)
   and that they **share** the design tokens, masthead, footer, and series nav — site-wide elements
   must be changed **identically on every page**;

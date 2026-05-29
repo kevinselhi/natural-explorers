@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tune the Evolver · Berkeley Natural Explorers Club</title>
+<!--
+  TUNE THE EVOLVER — a taste-training interface for the site's autonomous evolution.
+
+  This is NOT for picking edits (that's preview.html). Here the preview-tuner agent suggests up to
+  15 *ideas* and you tell it which AREAS you care about and which IDEAS are good. You never choose
+  what gets built — you train the evolve-site agent's judgment. Your ratings become one
+  `tuner-feedback` GitHub issue, which the preview-tuner distills into .claude/evolve-preferences.md
+  (the taste profile the site-evolver reads before proposing real changes).
+
+  Suggestions live in the SUGGESTIONS config near the bottom — the preview-tuner rewrites them each
+  round. Open over a local server or the published copy; works on a phone.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f1e3; --paper-light:#fbf7ec; --ink:#3a3327; --ink-soft:#5d5443;
+    --sage:#6b7d52; --forest:#445235; --ochre:#c9a23f; --clay:#b5654a; --creek:#8fa9b8; --rule:#d8ccae;
+    --display:"Caveat","Bradley Hand","Segoe Print","Comic Sans MS",cursive;
+    --serif:"Lora",Georgia,"EB Garamond","Times New Roman",serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;
+    background-image:radial-gradient(circle at 18% 22%,rgba(201,162,63,.05),transparent 42%),
+                     radial-gradient(circle at 82% 8%,rgba(107,125,82,.06),transparent 40%);}
+  .page-intro{max-width:42rem;margin:0 auto;padding:1.6rem 1.25rem .4rem;text-align:center;border-bottom:2px dashed var(--rule);}
+  .page-intro h1{font-family:var(--display);color:var(--forest);font-size:clamp(2rem,7vw,2.8rem);margin:0 0 .2rem;}
+  .page-intro p{font-size:.95rem;color:var(--ink-soft);margin:.25rem 0;}
+  .wrap{max-width:42rem;margin:0 auto;padding:0 1.25rem 7rem;}
+
+  h2{font-family:var(--display);color:var(--clay);font-size:clamp(1.6rem,5.5vw,2.1rem);margin:2rem 0 .3rem;}
+  .hint{font-size:.9rem;color:var(--ink-soft);margin:0 0 .8rem;}
+
+  /* Areas of focus — chips with checkboxes */
+  .areas{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:.5rem 0 0;}
+  .areas label{display:inline-flex;align-items:center;gap:.4rem;background:var(--paper-light);
+    border:1px solid var(--rule);border-radius:999px;padding:.35rem .8rem;font-size:.95rem;cursor:pointer;}
+  .areas input{accent-color:var(--sage);}
+  .areas label:has(input:checked){background:rgba(107,125,82,.16);border-color:var(--sage);color:var(--forest);}
+
+  /* Suggestion cards */
+  .sug{background:var(--paper-light);border:1px solid var(--rule);border-radius:8px;
+    padding:.8rem .95rem;margin:.9rem 0;box-shadow:0 4px 12px rgba(58,51,39,.06);}
+  .sug .area-tag{font-family:var(--display);font-size:1.05rem;color:var(--sage);}
+  .sug h3{margin:.1rem 0 .25rem;font-family:var(--serif);font-size:1.05rem;color:var(--ink);font-weight:600;}
+  .sug p{margin:0 0 .6rem;font-size:.92rem;color:var(--ink-soft);}
+  .rate{display:flex;gap:.4rem;}
+  .rate label{flex:0 0 auto;border:1px solid var(--rule);border-radius:6px;padding:.25rem .7rem;
+    font-size:.95rem;cursor:pointer;background:var(--paper);user-select:none;}
+  .rate input{position:absolute;opacity:0;width:0;height:0;}
+  .rate label.good:has(input:checked){background:rgba(107,125,82,.2);border-color:var(--sage);color:var(--forest);}
+  .rate label.bad:has(input:checked){background:rgba(181,101,74,.18);border-color:var(--clay);color:var(--clay);}
+
+  /* Sticky submit bar */
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper-light);border-top:2px dashed var(--rule);
+    padding:.7rem 1rem;display:flex;justify-content:center;align-items:center;gap:1rem;}
+  .bar .count{font-size:.9rem;color:var(--ink-soft);}
+  .bar button{font-family:var(--display);font-size:1.4rem;color:var(--paper);background:var(--sage);
+    border:0;border-radius:8px;padding:.45rem 1.4rem;cursor:pointer;box-shadow:0 4px 12px rgba(58,51,39,.16);}
+  .bar button:hover{background:var(--forest);}
+  footer.note{max-width:42rem;margin:1.5rem auto 0;padding:0 1.25rem;color:var(--ink-soft);font-size:.82rem;font-style:italic;text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="page-intro">
+  <h1>Tune the Evolver</h1>
+  <p>You're <strong>training the site's evolution agent</strong>, not choosing edits. Mark the
+     <strong>areas</strong> you want it to focus on, and thumbs the <strong>ideas</strong> that are good.</p>
+  <p>Hit <em>Submit feedback</em> once at the bottom — it files a single issue the agent learns from. Nothing here gets built directly.</p>
+</div>
+
+<main class="wrap">
+  <section>
+    <h2>Areas to focus on</h2>
+    <p class="hint">Which kinds of improvement should the agent spend its energy on? Pick any.</p>
+    <ul class="areas" id="areas"></ul>
+  </section>
+
+  <section>
+    <h2>Are these good ideas?</h2>
+    <p class="hint">👍 = a good direction · 👎 = not for me · leave blank if neutral. Up to 15 ideas.</p>
+    <div id="sugs"></div>
+  </section>
+</main>
+
+<div class="bar">
+  <span class="count" id="count">0 areas · 0 👍 · 0 👎</span>
+  <button id="submit">Submit feedback →</button>
+</div>
+
+<footer class="note">Local taste-training tool. Ideas are rewritten each round by the preview-tuner; ratings update <code>.claude/evolve-preferences.md</code>.</footer>
+
+<script>
+/* ============================================================================
+   CONFIG — rewritten by the preview-tuner agent each round.
+   AREAS:       focus areas Kevin can prioritize.
+   SUGGESTIONS: up to 15 ideas, each { id, area, title, rationale }. NOT implemented —
+                they exist only to learn which areas/ideas Kevin values.
+   ============================================================================ */
+const REPO = 'kevinselhi/natural-explorers';
+
+const AREAS = [
+  'Copywriting & voice', 'Visual polish & spacing', 'Color & palette',
+  'Illustrations & imagery', 'Navigation & wayfinding', 'Accessibility',
+  'Content depth', 'Mobile experience', 'Calls to action', 'Performance'
+];
+
+const SUGGESTIONS = [
+  { id:'s1',  area:'Copywriting & voice',     title:'Tighten the home.html opening so the three goals land in the first screen', rationale:'A shorter, punchier lede helps a busy parent grasp the club fast.' },
+  { id:'s2',  area:'Calls to action',         title:'Add a primary CTA high on home.html, not only in the guide directory',     rationale:'Give first-time visitors one obvious next tap above the fold.' },
+  { id:'s3',  area:'Illustrations & imagery', title:'Give hike.html a proper landscape hero / share image',                      rationale:'Its hero is a portrait photo; a 16:9 shot would make link previews look right.' },
+  { id:'s4',  area:'Visual polish & spacing', title:'Unify vertical rhythm/section spacing across the five pages',               rationale:'Small consistency wins make the set feel professionally finished.' },
+  { id:'s5',  area:'Navigation & wayfinding', title:'Add a gentle "back to top" affordance on the long pages',                   rationale:'index.html and hike.html are long scrolls on a phone.' },
+  { id:'s6',  area:'Accessibility',           title:'Add clear keyboard focus styles on links and buttons',                      rationale:'Visible focus rings help keyboard and switch users.' },
+  { id:'s7',  area:'Content depth',           title:'Add a compact "difficulty · time · what to bring" summary atop hike.html',  rationale:'Parents decide fast when the essentials are scannable up top.' },
+  { id:'s8',  area:'Copywriting & voice',     title:'Sharpen bridge.html\'s opening so the mentorship framing lands in one line', rationale:'Lead with the emotional hook before the logistics.' },
+  { id:'s9',  area:'Illustrations & imagery', title:'Generate the optional logo.png wordmark to replace the inline SVG emblem',   rationale:'A hand-lettered wordmark could warm the masthead further.' },
+  { id:'s10', area:'Mobile experience',       title:'Make the series-nav tap targets larger and easier to hit on phones',        rationale:'The ✦-separated links are a little tight for thumbs.' },
+  { id:'s11', area:'Content depth',           title:'Add a short "free & for everyone" reassurance near each page\'s CTA',        rationale:'Reinforces the access message right at the decision point.' },
+  { id:'s12', area:'Color & palette',         title:'Introduce one consistent accent for section sub-headers across pages',       rationale:'A repeated accent adds polish without new colors.' }
+];
+
+/* ---------- rendering + submit (generic) ---------- */
+function el(t,c,h){const n=document.createElement(t);if(c)n.className=c;if(h!=null)n.innerHTML=h;return n;}
+
+function renderAreas(){
+  const ul=document.getElementById('areas');
+  AREAS.forEach((a,i)=>{
+    const lab=el('label');
+    lab.innerHTML=`<input type="checkbox" name="area" value="${a}"> ${a}`;
+    ul.appendChild(lab);
+  });
+}
+function renderSugs(){
+  const box=document.getElementById('sugs');
+  SUGGESTIONS.slice(0,15).forEach(s=>{
+    const card=el('div','sug');
+    card.appendChild(el('div','area-tag',s.area));
+    card.appendChild(el('h3',null,s.title));
+    if(s.rationale) card.appendChild(el('p',null,s.rationale));
+    const rate=el('div','rate');
+    rate.innerHTML =
+      `<label class="good"><input type="radio" name="rate-${s.id}" value="good"> 👍 Good</label>`+
+      `<label class="bad"><input type="radio" name="rate-${s.id}" value="bad"> 👎 Not for me</label>`;
+    card.appendChild(rate);
+    box.appendChild(card);
+  });
+}
+function tally(){
+  const areas=document.querySelectorAll('input[name="area"]:checked').length;
+  const good=document.querySelectorAll('input[value="good"]:checked').length;
+  const bad=document.querySelectorAll('input[value="bad"]:checked').length;
+  document.getElementById('count').textContent=`${areas} areas · ${good} 👍 · ${bad} 👎`;
+}
+function submit(){
+  const areas=[...document.querySelectorAll('input[name="area"]:checked')].map(i=>i.value);
+  const rated=SUGGESTIONS.map(s=>{
+    const sel=document.querySelector(`input[name="rate-${s.id}"]:checked`);
+    return {s, v: sel?sel.value:'neutral'};
+  });
+  const good=rated.filter(r=>r.v==='good'), bad=rated.filter(r=>r.v==='bad');
+  let body='Feedback for the site-evolution agent. **Do not implement these directly** — learn from them and update `.claude/evolve-preferences.md`.\n\n';
+  body+='## Focus areas I care about\n'+(areas.length?areas.map(a=>`- ${a}`).join('\n'):'- (none selected)')+'\n\n';
+  body+='## Good ideas (👍)\n'+(good.length?good.map(r=>`- [${r.s.area}] ${r.s.title}`).join('\n'):'- (none)')+'\n\n';
+  body+='## Not for me (👎)\n'+(bad.length?bad.map(r=>`- [${r.s.area}] ${r.s.title}`).join('\n'):'- (none)')+'\n\n';
+  body+='_Unrated ideas are neutral and omitted._';
+  const url=`https://github.com/${REPO}/issues/new?title=${encodeURIComponent('Preview-tuner feedback')}&body=${encodeURIComponent(body)}&labels=tuner-feedback`;
+  window.open(url,'_blank','noopener');
+}
+
+renderAreas(); renderSugs();
+document.addEventListener('change', tally);
+document.getElementById('submit').addEventListener('click', submit);
+</script>
+
+</body>
+</html>

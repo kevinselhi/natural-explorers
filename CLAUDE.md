@@ -134,6 +134,17 @@ Components: `.claude/commands/evolve-site.md` (orchestrator), `.claude/agents/si
 ambiguous or risky, the subagent leaves a clarifying comment and keeps the issue open instead of
 guessing. To drive it by hand: run `/evolve-site` (or say "evolve the site").
 
+### Taste-training layer (tuner.html → preview-tuner → evolve-preferences.md)
+A second loop *trains the evolver's judgment* rather than shipping edits. `tuner.html` shows up to **15
+improvement ideas** (and focus-area chips); Kevin rates **which areas matter** and **which ideas are good**
+(👍/👎) — he never picks edits here. "Submit feedback" files **one `tuner-feedback` issue**. The
+**`preview-tuner` subagent** (`.claude/agents/preview-tuner.md`, command `/tune-preview`) reads that issue
+and distills it into **`.claude/evolve-preferences.md`** — the taste profile — then refills `tuner.html`
+with a smarter batch. The **`site-evolver` reads `.claude/evolve-preferences.md`** before proposing real
+changes, so the `preview.html`/`evolve-site` loop improves over time. The preview-tuner **never edits the
+site** — only `tuner.html` + the preferences file. (So: `tuner.html` trains taste; `preview.html` ships
+changes.)
+
 ## Architecture & conventions (shared across all five pages)
 
 - **Design system is CSS custom properties** in `:root` (top of each `<style>` block), and all five
