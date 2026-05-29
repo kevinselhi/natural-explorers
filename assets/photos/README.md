@@ -14,6 +14,7 @@ Expected files (all JPEG):
 | `mural-trolley.jpg` | Stop 1 — the streetcar mural at 841 Alameda |
 | `golden-gate-view.jpg` | Stop 2 — Golden Gate & Bay from the Indian Rock Path |
 | `harold-lamppost.jpg` | Stop 3 — "Harold, the Notable Lamppost" plaque |
+| `harold-plaque.jpg` | Stop 3 — close-up of the "Harold" plaque |
 | `indian-rock.jpg` | Stop 4 — the Indian Rock Park bouldering formation |
 | `mortar-rock.jpg` | Stop 5 — Ohlone mortar pits at Mortar Rock |
 | `waterfall.jpg` | Stop 6 — the John Hinkel Park waterfall |
