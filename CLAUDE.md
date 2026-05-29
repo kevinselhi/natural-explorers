@@ -5,14 +5,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 A small, self-contained static site for the **Berkeley Natural Explorers Club**, companion to the
-club's **Thousand Oaks → John Hinkel Park** hike. There are **two published pages**, designed as a
-linked series (a shared series-nav bar at the top of each links to the other):
+club's **Thousand Oaks → John Hinkel Park** hike. There are **three published pages**, designed as a
+linked series (a shared series-nav bar at the top of each links to the others):
 
 - **`index.html`** — *"Your First Nature Drawing."* A parent-facing guide to leading a child's first
   nature drawing at the park waterfall and growing it into a nature journal. Content and visual style
   are adapted from *Keeping a Nature Journal* by Clare Walker Leslie.
 - **`hike.html`** — *the hike guide itself:* Thousand Oaks Elementary → John Hinkel Park via the
   Indian Rock Path and San Diego Road, with history, plant ID, bouldering, and the waterfall.
+- **`reading-buddy-hike.html`** — *"Take the Trail Together."* A parent-facing invitation for Thousand
+  Oaks 3rd/4th-grade families to take their child + that child's younger reading buddy on the John
+  Hinkel Park hike, with the older child in the guide/mentor role. Same design system and image
+  contract as `index.html`; cross-links to both other pages. Uses two illustration slots
+  (`reading-buddies-trail.png`, `read-on-a-rock.png`). **Note:** the John Hinkel Park parking/driving
+  directions are left as a clearly-marked `[TO CONFIRM — Kevin]` flag in a `.note.todo` callout —
+  the existing pages only cover the 90-min school-to-park walk, so those details await Kevin.
 
 There is **no build step, no JS framework, and no dependencies.** Each page is one HTML file with an
 embedded `<style>` block. The site is deployed via **GitHub Pages** from the repo root on every push
@@ -42,7 +49,7 @@ There are **two parallel tracks**, each with a local studio, a publish script, a
 
 | Track | Slots live in | Filetype | Local studio (gitignored) | Publish script | Slash command |
 |-------|---------------|----------|---------------------------|----------------|---------------|
-| **Illustrations** | `index.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
+| **Illustrations** | `index.html`, `reading-buddy-hike.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
 | **Photos** (© Kevin Selhi) | `hike.html` | `.jpg` in `assets/photos/` | `photo-studio.html` | `bin/publish-photos.sh` | `/publish-photos` |
 
 - **Studios** (`studio.html`, `photo-studio.html`) are **local workflow tools, gitignored, not part of
