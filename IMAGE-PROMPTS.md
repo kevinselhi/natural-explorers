@@ -100,9 +100,10 @@ four; tiny hand-lettered labels under each.
 
 ## Reading-buddy hike slots (`reading-buddy-hike.html`)
 
-Same Global Style Preamble applies — prepend it to each. Keep the palette and loose
-hand-made look consistent with the slots above so all the pages read as one set. Keep
-children's faces generic and gentle.
+Same Global Style Preamble applies — prepend it. Keep the palette and loose hand-made look
+consistent with the slots above so all the pages read as one set. Keep children's faces
+generic and gentle. (This page also reuses the existing `hero-waterfall.png` for its
+draw-at-the-waterfall section — no new art needed there.)
 
 ### 14. Reading-buddy hero — `reading-buddies-trail.png`
 **Aspect ratio:** 16:9 (wide)
@@ -113,15 +114,6 @@ them, dappled morning light, a hint of a creek to one side. Warm and companionab
 one is clearly the guide. Quick watercolor-and-ink journal style.
 **Used as:** hero illustration.
 **Alt text:** "Two children walking a wooded Berkeley trail together, the older child pointing the way ahead while the younger one follows close behind, dappled light through coast live oaks — loose watercolor-and-ink journal style."
-
-### 15. Reading on a rock — `read-on-a-rock.png`
-**Aspect ratio:** 4:3
-**Prompt:** An older child and a younger child sitting close together on a flat creekside rock
-in dappled light, the older one holding an open picture book and reading aloud while the little
-one leans in to look at the pages. A small creek or the foot of a little waterfall just behind
-them, ferns and mossy stones around. Tender and quiet. Quick watercolor-and-ink journal style.
-**Used as:** "Read on the Trail" illustration.
-**Alt text:** "An older child and a younger child sitting together on a flat creekside rock in dappled light, the older one reading aloud from a picture book while the little one leans in to look — loose watercolor-and-ink journal style."
 
 ---
 

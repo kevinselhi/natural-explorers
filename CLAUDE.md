@@ -13,13 +13,13 @@ linked series (a shared series-nav bar at the top of each links to the others):
   are adapted from *Keeping a Nature Journal* by Clare Walker Leslie.
 - **`hike.html`** — *the hike guide itself:* Thousand Oaks Elementary → John Hinkel Park via the
   Indian Rock Path and San Diego Road, with history, plant ID, bouldering, and the waterfall.
-- **`reading-buddy-hike.html`** — *"Take the Trail Together."* A parent-facing invitation for Thousand
-  Oaks 3rd/4th-grade families to take their child + that child's younger reading buddy on the John
-  Hinkel Park hike, with the older child in the guide/mentor role. Same design system and image
-  contract as `index.html`; cross-links to both other pages. Uses two illustration slots
-  (`reading-buddies-trail.png`, `read-on-a-rock.png`). **Note:** the John Hinkel Park parking/driving
-  directions are left as a clearly-marked `[TO CONFIRM — Kevin]` flag in a `.note.todo` callout —
-  the existing pages only cover the 90-min school-to-park walk, so those details await Kevin.
+- **`reading-buddy-hike.html`** — *"Take the Trail Together."* A parent-facing **pitch for the
+  `hike.html` hike** (not a new trip): an invitation for Thousand Oaks 3rd/4th-grade families to lead
+  their child + that child's younger reading buddy on the existing Thousand Oaks → John Hinkel Park
+  hike, with the older child in the guide/mentor role. No reading activity — the buddy pairing is just
+  the premise; the on-trail "extra" is an optional nature drawing at the waterfall. Same design system
+  and image contract; cross-links to both other pages (hard CTA to `hike.html`). Adds one illustration
+  slot (`reading-buddies-trail.png`) and reuses the existing `hero-waterfall.png`.
 
 There is **no build step, no JS framework, and no dependencies.** Each page is one HTML file with an
 embedded `<style>` block. The site is deployed via **GitHub Pages** from the repo root on every push
