@@ -64,7 +64,7 @@ There are **two parallel tracks**, each with a local studio, a publish script, a
 
 | Track | Slots live in | Filetype | Local studio (gitignored) | Publish script | Slash command |
 |-------|---------------|----------|---------------------------|----------------|---------------|
-| **Illustrations** | `home.html`, `index.html`, `reading-buddy-hike.html`, `bridge.html` | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
+| **Illustrations** | `home.html`, `index.html`, `reading-buddy-hike.html`, `bridge.html`, `hike.html` (one nature-drawing tie-in plate) | `.png` in `assets/illustrations/` | `studio.html` | `bin/publish-art.sh` | `/publish-art`, `/add-art` |
 | **Photos** (© Kevin Selhi) | `hike.html` | `.jpg` in `assets/photos/` | `photo-studio.html` | `bin/publish-photos.sh` | `/publish-photos` |
 
 - **Studios** (`studio.html`, `photo-studio.html`) are **local workflow tools, gitignored, not part of
@@ -83,9 +83,38 @@ There are **two parallel tracks**, each with a local studio, a publish script, a
 `assets/illustrations/README.md` (illustrations) and `assets/photos/README.md` (photos). The page
 references exact filenames — match them precisely, and give every `<img>` meaningful `alt` text.
 
-## Architecture & conventions (shared by both pages)
+**Keep image files light (mobile-first).** Source art and photos arrive at many MB; compress before
+publishing. Photos ship as optimized JPEG (~0.5–0.9 MB). Illustrations stay `.png` (the filename
+contract) but should be downscaled to ~1600 px on the long edge and palette-quantized to 256 colors —
+e.g. Pillow `Image.quantize(256, …)` with Floyd–Steinberg dither, which holds up for the flat
+watercolor style (it took the illustration set from ~27 MB to ~5 MB). System Python is externally
+managed (PEP 668), so run Pillow from a throwaway venv
+(`python3 -m venv /tmp/v && /tmp/v/bin/pip install pillow`) rather than installing globally; `sips` is
+a no-dependency fallback for resizing. This complements the hero-dimension rule below: small files
+*and* honest `og:image:width/height`. **`bin/compress-images.sh` (slash command `/compress-images`)
+automates exactly this** — it's the canonical way to apply this convention; see "Local dev tools".
 
-- **Design system is CSS custom properties** in `:root` (top of each `<style>` block), and the two
+## Local dev tools
+
+Beyond the two image studios (above), two general tools support the workflow. Both keep Kevin
+(non-coding, often reviewing on a phone) in control without hand-editing:
+
+- **`preview.html`** — a reusable **"Preview & Pick"** page (tracked & published, so it can be opened
+  on a phone). Successor to the old masthead-only picker; it works for *any* site-wide decision
+  (masthead, footer, palette, buttons, layout). Edit the `ROUNDS` config block to define a decision
+  and its variants; each variant renders **live in the real design tokens**, and the engine
+  auto-builds a "Pick this →" link that opens a pre-filled **GitHub issue** Claude can act on (plus a
+  "describe a mix/tweak" link). To preview something new, you only edit `ROUNDS` — never the engine.
+- **`bin/compress-images.sh`** (slash command **`/compress-images`**) — finds images over budget
+  (file > 1500 KB or longest edge > 1600 px) across `assets/illustrations/` + `assets/photos/`,
+  rewrites them smaller **in place** (preserving filenames), then commits + pushes (like
+  `publish-art.sh`). `--dry-run` to preview; pass file paths to target specific images. The Pillow
+  worker is `bin/compress_images.py`; the wrapper manages a private venv at `bin/.venv-img/`
+  (gitignored). This is the canonical way to apply the image-weight convention above.
+
+## Architecture & conventions (shared across all five pages)
+
+- **Design system is CSS custom properties** in `:root` (top of each `<style>` block), and all five
   pages **share the same token set** — keep them identical so the series reads as one. Two groups:
   paper/ink neutrals and an "East Bay oak-woodland" accent palette (`--sage`, `--forest`, `--ochre`,
   `--clay`, `--creek`). Use these variables rather than hardcoding colors. (The studios deliberately
