@@ -1,8 +1,9 @@
 # Illustration & Image Generation Guide
 
 These are ready-to-paste prompts for generating the illustrations used across the
-**Berkeley Natural Explorers Club** pages — "Your First Nature Drawing" (`index.html`)
-and "Take the Trail Together," the reading-buddy hike (`reading-buddy-hike.html`).
+**Berkeley Natural Explorers Club** pages — "Your First Nature Drawing" (`index.html`),
+"Take the Trail Together," the reading-buddy hike (`reading-buddy-hike.html`), and
+"Bridge to Middle School" (`bridge.html`).
 
 The art should match the look of *Keeping a Nature Journal* by Clare Walker Leslie — loose,
 hand-drawn, and clearly made by a person, not a machine — while being localized to **John
@@ -114,6 +115,27 @@ them, dappled morning light, a hint of a creek to one side. Warm and companionab
 one is clearly the guide. Quick watercolor-and-ink journal style.
 **Used as:** hero illustration.
 **Alt text:** "Two children walking a wooded Berkeley trail together, the older child pointing the way ahead while the younger one follows close behind, dappled light through coast live oaks — loose watercolor-and-ink journal style."
+
+---
+
+## Bridge-to-middle-school slots (`bridge.html`)
+
+Same Global Style Preamble applies — prepend it. Keep the palette and loose hand-made look
+consistent with the slots above so all the pages read as one set. Keep children's faces generic
+and gentle. (This page also reuses the existing `hero-waterfall.png` for its draw-at-the-waterfall
+section and `reading-buddies-trail.png` for its "what we noticed" section — no new art needed
+there.)
+
+### 15. Bridge-to-middle-school hero — `mentor-bridge-trail.png`
+**Aspect ratio:** 16:9 (wide)
+**Prompt:** An older child of about 11–12, a bit taller, walking a gentle wooded Berkeley trail
+half-turned to talk with two younger children of about 8–9 who look up at them, listening. The
+older one gestures easily, like telling the younger kids what to expect up ahead. Coast live oaks
+and ferns, dappled morning light, a hint of a creek and a small footbridge crossing it to one
+side. Warm and reassuring; the older kid is a trusted guide, not a teacher. Quick
+watercolor-and-ink journal style.
+**Used as:** hero illustration.
+**Alt text:** "An older child walking a wooded Berkeley trail with two younger children who look up at them listening, a small footbridge over a creek to one side, dappled light through coast live oaks — loose watercolor-and-ink journal style."
 
 ---
 
