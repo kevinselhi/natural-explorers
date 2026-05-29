@@ -165,8 +165,11 @@ const ROUNDS = [
 
 /* ---------- rendering engine (generic — usually no need to touch) ---------- */
 function issueUrl(title, body){
+  // The `evolve` label is the explicit opt-in that lets the site-evolver agent act
+  // on this pick (see CLAUDE.md → "Self-evolution loop"). Unlabeled issues are never touched.
   return `https://github.com/${REPO}/issues/new`
-       + `?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+       + `?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`
+       + `&labels=evolve`;
 }
 function el(tag, cls, html){
   const n = document.createElement(tag);
