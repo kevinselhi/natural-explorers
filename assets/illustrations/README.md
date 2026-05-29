@@ -1,6 +1,6 @@
 # Illustrations
 
-Drop the generated PNG illustrations here. The pages (`../../index.html`,
+Drop the generated PNG illustrations here. The pages (`../../home.html`, `../../index.html`,
 `../../reading-buddy-hike.html`, and `../../bridge.html`) reference these exact filenames, so
 names must match. See `../../IMAGE-PROMPTS.md` for the prompt for each one.
 
@@ -12,6 +12,7 @@ Expected files:
 | Filename | Where it appears |
 |----------|------------------|
 | `logo.png` | Masthead logo (optional upgrade over the built-in SVG emblem) |
+| `home-hero.png` | Landing page (`home.html`) — hero |
 | `hero-waterfall.png` | Hero — child sketching at the waterfall |
 | `first-drawing.png` | "At the Waterfall" centerpiece |
 | `principle-1-sit-spot.png` | Principle 1 — Pick a Sit Spot |
