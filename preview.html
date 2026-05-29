@@ -130,36 +130,33 @@
 const REPO = 'kevinselhi/natural-explorers';
 
 const ROUNDS = [
-  // Real decisions worth weighing. Each variant renders live in the site tokens;
-  // picking one files an `evolve`-labeled issue and the daily routine ships it.
-  // (Footer wording is intentionally not here — it's already in flight as issue #17.)
+  // One decision at a time: keep a SINGLE round here. The site-evolver appends the
+  // next single round after each pick is shipped (one change per evolution).
 
   {
-    id: 'cta-button',
-    title: 'Primary button style',
-    subject: 'the .cta "Open the hike guide" button shared by home.html, reading-buddy-hike.html, and bridge.html',
-    intro: 'The big call-to-action that sends families to the hike guide. Same handwritten label — three looks.',
-    context: 'plain',
+    id: 'footer-tagline',
+    title: 'Footer sign-off tagline',
+    subject: 'the footer .free tagline line shared across all five pages',
+    intro: 'The last thing a reader sees on every page — the emotional closing note. Three ways to say it.',
+    context: 'footer',
     variants: [
       {
-        key: 'A', label: 'Sage fill (current)',
-        desc: 'Solid sage-green button — what the site ships today.',
-        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--paper);background:var(--sage);border-radius:6px;padding:.5rem 1.25rem;text-decoration:none;box-shadow:0 4px 12px rgba(58,51,39,.14)">Open the hike guide →</a>`
+        key: 'A', label: 'Our parks (current)',
+        desc: 'Collective and declarative — "our" and "everyone". Already on the site.',
+        html: `<p class="free">Our parks and paths are free, and they belong to everyone.</p>`
       },
       {
-        key: 'B', label: 'Terracotta fill',
-        desc: 'Warmer clay fill — reads friendlier and a touch more "tap me".',
-        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--paper);background:var(--clay);border-radius:6px;padding:.5rem 1.25rem;text-decoration:none;box-shadow:0 4px 12px rgba(58,51,39,.14)">Open the hike guide →</a>`
+        key: 'B', label: 'East Bay invite',
+        desc: 'Place-specific and warmly inviting — calls out the East Bay and extends an open invitation.',
+        html: `<p class="free">The East Bay's trails are your family's — free, open, and just up the hill.</p>`
       },
       {
-        key: 'C', label: 'Outlined (quieter)',
-        desc: 'Forest outline on paper — calmer, lets the illustrations lead.',
-        html: `<a href="#" onclick="return false" style="display:inline-block;font-family:var(--display);font-size:1.5rem;color:var(--forest);background:transparent;border:2px solid var(--forest);border-radius:6px;padding:.45rem 1.2rem;text-decoration:none">Open the hike guide →</a>`
+        key: 'C', label: 'Three beats',
+        desc: 'Short punchy three-clause rhythm — free, open, welcome.',
+        html: `<p class="free">Our paths are free. Our parks are open. Your kids are welcome.</p>`
       }
     ]
   }
-  // One decision at a time: keep a SINGLE round here. The site-evolver appends the
-  // next single round after each pick is shipped (one change per evolution).
 ];
 
 /* ---------- rendering engine (generic — usually no need to touch) ---------- */
