@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## What this is
 
@@ -53,26 +53,25 @@ This **is** a git repo with an `origin` remote; pushing to `main` republishes th
 `naturejournal.bundle` is a **gitignored local archive** (a snapshot of the page's earlier history
 from the larger `treehousedads/kevin` repo) — it's no longer the source of truth and is not published.
 
-## Parallel Codex / other-assistant mirror (keep in sync when you touch the Claude sources)
+## You are reading the generated mirror (Claude sources are authoritative)
 
-This repo carries a second, machine-generated copy of the agent tooling for a non-Claude assistant
-(Codex), produced by find/replacing `Claude`→`Codex` over the Claude sources:
+This file and the Codex agent tooling are a mirror generated from the Claude Code sources:
 
-| Claude source (authoritative) | Codex mirror (generated) |
+| Claude source (authoritative) | Codex mirror (this side) |
 |-------------------------------|--------------------------|
 | `CLAUDE.md` | `AGENTS.md` |
 | `.claude/agents/*.md` | `.codex/agents/*.toml` |
 | `.claude/commands/*.md` | `.agents/skills/source-command-*/SKILL.md` |
 | `.claude/evolve-preferences.md` | *(no mirror — shared file, stays in `.claude/`)* |
 
-**Treat the `.claude/` files as the source of truth; when you change one, update its mirror to
+**The `.claude/` files are the source of truth; edits land there first and the mirror is updated to
 match** (adapting paths/formats deliberately — a blind `Claude`→`Codex` text replace corrupts real
-paths, which is how the mirror was originally broken). Two rules keep it sane:
+paths, which is how this mirror was originally broken). Two rules keep it sane:
 `.claude/evolve-preferences.md` is **shared** — both assistants read and write the same file, there
 is no Codex copy; and mirror files reference the Codex-side paths (`.codex/agents/*.toml`,
 `.agents/skills/…/SKILL.md`), not the Claude ones. None of the mirror is part of the published site.
 
-## The image / photo workflow (no Claude tokens spent on art)
+## The image / photo workflow (no Codex tokens spent on art)
 
 The pages reference images that may not exist yet. **CSS on the image figures renders a missing file
 as its `alt`/caption text in a soft framed box, never a broken-image icon** — so the site stays
@@ -122,7 +121,7 @@ Beyond the two image studios (above), three general tools support the workflow. 
   on a phone). Successor to the old masthead-only picker; it works for *any* site-wide decision
   (masthead, footer, palette, buttons, layout). Edit the `ROUNDS` config block to define a decision
   and its variants; each variant renders **live in the real design tokens**, and the engine
-  auto-builds a "Pick this →" link that opens a pre-filled **GitHub issue** Claude can act on (plus a
+  auto-builds a "Pick this →" link that opens a pre-filled **GitHub issue** Codex can act on (plus a
   "describe a mix/tweak" link). To preview something new, you only edit `ROUNDS` — never the engine.
   This is the **ship-a-change** interface — it feeds the self-evolution loop below.
 - **`tuner.html`** — a reusable **"Tune the Evolver"** page (tracked & published). The **train-taste**
@@ -147,14 +146,14 @@ The site improves itself in a human-gated loop, with `preview.html` as the choos
 2. **Pick** — Kevin taps a variant (and/or adds tweaks in the issue). His pick *is* the approval.
 3. **Evolve** — `/evolve-site` (run manually, or by a **daily scheduled routine**) takes the **single
    oldest** open `evolve` issue (**one change per evolution** — any others wait for the next run) and
-   dispatches the **`site-evolver` subagent** (`.claude/agents/site-evolver.md`). The subagent
+   dispatches the **`site-evolver` subagent** (`.codex/agents/site-evolver.toml`). The subagent
    implements that change across the five pages per these conventions, compresses images if needed,
    verifies, **pushes to live**, then **appends exactly one new round** to `preview.html` (removing the
    resolved one — preview.html holds a single round at a time). The command then comments the summary on
    the issue, relabels it `evolve → site-evolved`, and closes it.
 4. **Repeat** — the new rounds wait in `preview.html` for the next pick.
 
-Components: `.claude/commands/evolve-site.md` (orchestrator), `.claude/agents/site-evolver.md`
+Components: `.agents/skills/source-command-evolve-site/SKILL.md` (orchestrator), `.codex/agents/site-evolver.toml`
 (worker), labels `evolve` / `site-evolved`, and the daily routine. Guardrail: if a request is
 ambiguous or risky, the subagent leaves a clarifying comment and keeps the issue open instead of
 guessing. To drive it by hand: run `/evolve-site` (or say "evolve the site").
@@ -163,7 +162,7 @@ guessing. To drive it by hand: run `/evolve-site` (or say "evolve the site").
 A second loop *trains the evolver's judgment* rather than shipping edits. `tuner.html` shows up to **15
 improvement ideas** (and focus-area chips); Kevin rates **which areas matter** and **which ideas are good**
 (👍/👎) — he never picks edits here. "Submit feedback" files **one `tuner-feedback` issue**. The
-**`preview-tuner` subagent** (`.claude/agents/preview-tuner.md`, command `/tune-preview`) reads that issue
+**`preview-tuner` subagent** (`.codex/agents/preview-tuner.toml`, command `/tune-preview`) reads that issue
 and distills it into **`.claude/evolve-preferences.md`** — the taste profile — then refills `tuner.html`
 with a smarter batch. The **`site-evolver` reads `.claude/evolve-preferences.md`** before proposing real
 changes, so the `preview.html`/`evolve-site` loop improves over time. The preview-tuner **never edits the
