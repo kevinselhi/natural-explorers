@@ -10,7 +10,8 @@ Expected files (all JPEG):
 
 | Filename | Where it appears |
 |----------|------------------|
-| `hero.jpg` | Hero — a wide shot of the hike |
+| `hero.jpg` | Hero — Kevin Selhi and Jude Selhi, cofounders of the Berkeley Natural Explorers Club |
+| `trail-pathways.jpg` | Closing photo — a wide shot of the hike's pathways, stairs, and parks (the former hero) |
 | `mural-trolley.jpg` | Stop 1 — the streetcar mural at 841 Alameda |
 | `golden-gate-view.jpg` | Stop 2 — Golden Gate & Bay from the Indian Rock Path |
 | `harold-lamppost.jpg` | Stop 3 — "Harold, the Notable Lamppost" plaque |
