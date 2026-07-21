@@ -159,6 +159,15 @@ Components: `.claude/commands/evolve-site.md` (orchestrator), `.claude/agents/si
 ambiguous or risky, the subagent leaves a clarifying comment and keeps the issue open instead of
 guessing. To drive it by hand: run `/evolve-site` (or say "evolve the site").
 
+**Cowork-runnable.** The loop is environment-portable (`command -v gh` decides): locally it uses the
+`gh` CLI and pushes the single oldest pick straight to `main` (above). In a **cowork / Claude Code on
+the web** session — where `gh` doesn't exist — `/evolve-site` instead uses the **GitHub MCP tools**,
+**drains all** open `evolve` issues, and ships each as its **own draft PR** (`Closes #N`) on branch
+`evolve/issue-<N>` rather than touching live `main`; **merging each PR is what ships it**. All
+`preview.html` round bookkeeping is funneled into one consolidated `evolve/preview-refresh` PR so
+parallel change PRs never collide. It can be launched on demand or as a scheduled cowork trigger
+(see <https://code.claude.com/docs/en/claude-code-on-the-web>).
+
 ### Taste-training layer (tuner.html → preview-tuner → evolve-preferences.md)
 A second loop *trains the evolver's judgment* rather than shipping edits. `tuner.html` shows up to **15
 improvement ideas** (and focus-area chips); Kevin rates **which areas matter** and **which ideas are good**
